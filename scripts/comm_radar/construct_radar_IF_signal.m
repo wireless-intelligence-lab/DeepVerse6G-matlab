@@ -114,9 +114,8 @@ switch params.comp_speed
         Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
         Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
         Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-        f_Doppler = (channel_params.Doppler_vel./Wavelength) + (channel_params.Doppler_acc./(2*physconst('LightSpeed')));
         %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-        Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) +(f_Doppler.*(time_fast - Tau_rt))  ));
+        Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) ));
         IF_mat = conj(sqrt(double(power)).*Phase_terms.*IF_sampling_mat);
         
         IF_signal = sum(reshape(array_response_RX, M_RX, 1, 1, num_paths, 1) .* reshape(array_response_TX, 1, M_TX, 1, num_paths, 1) .* reshape(IF_mat, 1, 1, N_ADC, num_paths, N_loop), 4);
@@ -127,9 +126,8 @@ switch params.comp_speed
         Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
         Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
         Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-        f_Doppler = (channel_params.Doppler_vel./Wavelength) + (channel_params.Doppler_acc./(2*physconst('LightSpeed')));
         %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-        Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) +(f_Doppler.*(time_fast - Tau_rt))  ));
+        Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) ));
         IF_mat = conj(sqrt(double(power)).*Phase_terms.*IF_sampling_mat);
         
         IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
@@ -142,9 +140,8 @@ switch params.comp_speed
         Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
         Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
         Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-        f_Doppler = (channel_params.Doppler_vel./Wavelength) + (channel_params.Doppler_acc./(2*physconst('LightSpeed')));
         %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-        Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) +(f_Doppler.*(time_fast - Tau_rt))  ));
+        Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) ));
         IF_mat = conj(sqrt(double(power)).*Phase_terms.*IF_sampling_mat);
         
         IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
@@ -161,9 +158,8 @@ switch params.comp_speed
             Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
             Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
             Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-            f_Doppler = (channel_params.Doppler_vel./Wavelength) + (channel_params.Doppler_acc./(2*physconst('LightSpeed')));
             %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-            Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) +(f_Doppler.*(time_fast - Tau_rt))  ));
+            Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) ));
             IF_mat = conj(sqrt(double(power)).*Phase_terms.*IF_sampling_mat);
             IF_signal(:,:,:,ll)=sum(reshape(array_response_RX, M_RX, 1, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, 1, num_paths) .* reshape(IF_mat, 1, 1, N_ADC, num_paths), 4);
         end
@@ -175,9 +171,8 @@ switch params.comp_speed
             Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
             Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
             Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-            f_Doppler = (channel_params.Doppler_vel./Wavelength) + (channel_params.Doppler_acc./(2*physconst('LightSpeed')));
             %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-            Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) +(f_Doppler.*(time_fast - Tau_rt))  ));
+            Phase_terms = exp(sqrt(-1)*2*pi*( (double(channel_params.phase).*(ang_conv/(2*pi)) -F0_active.*(Tau2_rt+Tau3_rt)) +(0.5.*params.S.*(Tau_rt.^2)) -(params.S.*time_fast.*Tau_rt) ));
             IF_mat = conj(sqrt(double(power)).*Phase_terms.*IF_sampling_mat);
             for aa = 1:1:N_ADC
                 IF_signal(:,:,aa,ll)=sum(reshape(array_response_RX, M_RX, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, num_paths) .* reshape(IF_mat(aa,:), 1, 1, num_paths), 3);

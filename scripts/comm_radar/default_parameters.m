@@ -63,6 +63,8 @@ params.activate_RX_filter = 0;        % 0 No RX filter
 params.generate_OFDM_channels = 1;    % 1: activate frequency domain (FD) channel generation for OFDM systems
                                       % 0: activate instead time domain (TD) channel impulse response generation for non-OFDM systems
 params.num_paths = 5;                 % Maximum number of paths to be considered (a value between 1 and 25), e.g., choose 1 if you are only interested in the strongest path
+params.doppler = 1;                   % 1: Include Doppler information into the phase shift of the channel paths
+                                      % 0: Exclude Doppler information from the phase shift of the channel paths
 
 % OFDM parameters
 params.num_OFDM = 512;                % Number of OFDM subcarriers

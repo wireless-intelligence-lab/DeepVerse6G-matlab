@@ -72,6 +72,10 @@ function COMM_dataset = generate_data(params, params_inner)
             else
                 [COMM_dataset{t}.user{user}.channel]=construct_COMM_channel_TD(params_inner.num_ant_BS(t, :), params_inner.array_rotation_BS(t,:), params_inner.ant_spacing_BS(t), params.num_ant_UE, params_inner.array_rotation_UE(1, :), params.ant_spacing_UE, TX{t}.channel_params(user), params);
                 COMM_dataset{t}.user{user}.ToA = TX{t}.channel_params(user).ToA; %Time of Arrival/Flight of each channel path (seconds)
+                if params.doppler
+                    COMM_dataset{t}.user{user}.Doppler_vel = TX{t}.channel_params(user).Doppler_vel; %Doppler velocity of each channel path (meter/sec)
+                    COMM_dataset{t}.user{user}.Doppler_acc = TX{t}.channel_params(user).Doppler_acc; %Doppler acceleration oof each channel path (meter/(sec^2))
+                end            
             end
             COMM_dataset{t}.user{user}.rotation = params_inner.array_rotation_UE(1, :);
 
@@ -94,6 +98,10 @@ function COMM_dataset = generate_data(params, params_inner)
                 else
                     [COMM_dataset{t}.basestation{BSreceiver}.channel]=construct_COMM_channel_TD(params_inner.num_ant_BS(t, :), params_inner.array_rotation_BS(t,:), params_inner.ant_spacing_BS(t), params_inner.num_ant_BS(BSreceiver, :), params_inner.array_rotation_BS(BSreceiver,:), params_inner.ant_spacing_BS(BSreceiver), TX{t}.channel_params_BSBS(BSreceiver), params);
                     COMM_dataset{t}.basestation{BSreceiver}.ToA=TX{t}.channel_params_BSBS(BSreceiver).ToA; %Time of Arrival/Flight of each channel path (seconds)
+                    if params.doppler
+                        COMM_dataset{t}.basestation{BSreceiver}.Doppler_vel = TX{t}.channel_params_BSBS(BSreceiver).Doppler_vel; %Doppler velocity of each channel path (meter/sec)
+                        COMM_dataset{t}.basestation{BSreceiver}.Doppler_acc = TX{t}.channel_params_BSBS(BSreceiver).Doppler_acc; %Doppler acceleration oof each channel path (meter/(sec^2))
+                    end
                 end
                 COMM_dataset{t}.basestation{BSreceiver}.rotation = params_inner.array_rotation_BS(BSreceiver, :);
 
