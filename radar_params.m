@@ -1,9 +1,6 @@
 %%%% DeepSense Synth radar parameters set %%%%
 % A detailed description of the parameters is available on ... 
 
-
-
-
 % Antenna array dimensions
 params.num_ant_TX = [1, 1, 1];      % Number of antenna elements for the radar TX arrays at the BS in the x,y,z-axes
 % By defauly, all BSs will have the same array sizes
