@@ -13,7 +13,7 @@ BS_ID_map = params.BS_ID_map;
 %%% user_ID_map = params.user_ID_map;
 
 filename_BSBS_all = strcat(scenario_files,'_TX', int2str(BS_ID_map(BS_ID,2)),'.mat'); %%%%&&&&%%%%
-channels=importdata(filename_BSBS_all);
+channels = importdata(filename_BSBS_all);
 %%% total_num_BSs = size(BS_ID_map,1);
 num_paths = double(params.num_paths);
 tx_power_raytracing = params.transmit_power_raytracing;  % Current TX power in dBm

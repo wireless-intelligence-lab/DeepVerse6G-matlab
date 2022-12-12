@@ -24,8 +24,8 @@ function [dataset] = generate_wirelessverse_dataset(parameters_file)
         for bs=parameters.basestations
             bs_name = sprintf('bs%i', bs);
             for scene = 1:length(parameters.scenes)
-                dataset.(bs_name).wireless.parameters{scene} = wireless_params{scene};
-                dataset.(bs_name).wireless.channels{scene} = wireless_dataset{scene}{bs_count};
+                dataset{scene}.(bs_name).wireless.parameters = wireless_params{scene};
+                dataset{scene}.(bs_name).wireless.channels = wireless_dataset{scene}{bs_count};
             end
             bs_count = bs_count + 1;
         end
@@ -51,8 +51,8 @@ function [dataset] = generate_wirelessverse_dataset(parameters_file)
         for bs=parameters.basestations
             bs_name = sprintf('bs%i', bs);
             for scene = 1:length(parameters.scenes)
-                dataset.(bs_name).radar.parameters{scene} = radar_params{scene};
-                dataset.(bs_name).radar.channels{scene} = radar_dataset{scene}{bs_count};
+                dataset{scene}.(bs_name).radar.parameters = radar_params{scene};
+                dataset{scene}.(bs_name).radar.channels = radar_dataset{scene}{bs_count};
             end
             bs_count = bs_count + 1;
         end
@@ -68,19 +68,22 @@ function [dataset] = generate_wirelessverse_dataset(parameters_file)
         if parameters.camera
             for cam = parameters.camera_id
                 cam_name = sprintf('cam%i', cam);
-                dataset.(bs_name).image.(cam_name) = full_data.(bs_name).image.(cam_name);
-                dataset.(bs_name).image.(cam_name).data = dataset.(bs_name).image.(cam_name).data(parameters.scenes);
+                for scene = 1:length(parameters.scenes)
+                    dataset{scene}.(bs_name).image.(cam_name).data = full_data.(bs_name).image.(cam_name).data{parameters.scenes(scene)};
+                end
             end
         end
         if parameters.lidar
-            dataset.(bs_name).lidar = full_data.(bs_name).lidar;
-            dataset.(bs_name).lidar.data = dataset.(bs_name).lidar.data(parameters.scenes);
+            for scene = 1:length(parameters.scenes)
+                dataset{scene}.(bs_name).lidar.data = full_data.(bs_name).lidar.data{parameters.scenes(scene)};
+            end
         end
         if parameters.position
-            dataset.trajectory = load(fullfile(parameters.dataset_folder, parameters.scenario, full_data.trajectory));
-            dataset.trajectory.scene = dataset.trajectory.scene{parameters.scenes};
+            trajectory = load(fullfile(parameters.dataset_folder, parameters.scenario, full_data.trajectory));
+            for scene = 1:length(parameters.scenes)
+                dataset{scene}.trajectory = trajectory.scene{parameters.scenes(scene)};
+            end
         end
-
     end
 
 end

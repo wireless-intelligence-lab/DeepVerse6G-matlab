@@ -1,4 +1,4 @@
-wv.dataset_folder = 'C:\Users\udemirha\Desktop\WirelessVerse_Scenarios';
+wv.dataset_folder = 'C:\Users\Umt\Desktop\WV_scenarios';
 wv.scenario = 'Scenario 1';
 
 wv.basestations = [1, 2, 3, 4]; % Basestations to be included

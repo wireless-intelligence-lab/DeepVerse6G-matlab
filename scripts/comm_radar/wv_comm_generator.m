@@ -64,6 +64,7 @@ function COMM_dataset = generate_data(params, params_inner)
 
         %----- BS-User Channels
         %COMM_dataset{t}.user = struct([]);
+        COMM_dataset{t}.user = {};
         for user=1:length(TX{t}.channel_params)
             % Channel Construction
 
