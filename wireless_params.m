@@ -30,10 +30,6 @@ params.array_rotation_UE = [0, 30, 0];
 % Antenna array spacing
 params.ant_spacing_BS = .5;           % ratio of the wavelength; for half wavelength enter .5
 params.ant_spacing_UE = .5;           % ratio of the wavelength; for half wavelength enter .5
-
-% Antenna element radiation pattern
-params.radiation_pattern = 0;         % 0: Isotropic and 
-                                      % 1: Half-wave dipole
                                     
 % System parameters
 params.bandwidth = 0.05;              % The bandwidth in GHz
@@ -49,5 +45,3 @@ params.num_paths = 25;                 % Maximum number of paths to be considere
 params.num_OFDM = 512;                % Number of OFDM subcarriers
 params.OFDM_sampling_factor = 1;      % The constructed channels will be calculated only at the sampled subcarriers (to reduce the size of the dataset)
 params.OFDM_limit = 1;                % Only the first params.OFDM_limit subcarriers will be considered  
-
-params.saveDataset = 0;               % 0: Will return the dataset without saving it (highly recommended!) 

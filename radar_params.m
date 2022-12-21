@@ -70,5 +70,3 @@ params.num_paths = 500;                 % Maximum number of paths to be consider
 % Computation parameter
 params.comp_speed = 5;                 % control the compromise between computational speed and memory requirement 
                                              % (defined between 1 and 5), e.g., choose 5 if you are only interested in the fastest computation with the largest memeory requirement  
-
-params.saveDataset = 0;               % 0: Will return the dataset without saving it (highly recommended!) 

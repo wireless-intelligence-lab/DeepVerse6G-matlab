@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wireless Parameters &mdash; DeepVerse 6G 0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Radar Parameters" href="radar.html" />
+    <link rel="prev" title="General Parameters" href="general.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> DeepVerse 6G
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../parameters.html">Parameters</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="general.html">General Parameters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Wireless Parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#antenna-properties">Antenna Properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#shape">Shape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spacing">Spacing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rotation">Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#channel-properties">Channel Properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ofdm-options">OFDM Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="radar.html">Radar Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">Dataset Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DeepVerse 6G</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../parameters.html">Parameters</a></li>
+      <li class="breadcrumb-item active">Wireless Parameters</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/pages/parameters/wireless.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wireless-parameters">
+<h1>Wireless Parameters<a class="headerlink" href="#wireless-parameters" title="Permalink to this heading"></a></h1>
+<p>The wireless generation parameters are defined in <a class="reference internal" href="general.html#dv.wireless_parameters" title="dv.wireless_parameters"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">dv.wireless_parameters</span></code></a> file.
+These parameters are listed in detail as follows.</p>
+<section id="antenna-properties">
+<h2>Antenna Properties<a class="headerlink" href="#antenna-properties" title="Permalink to this heading"></a></h2>
+<section id="shape">
+<h3>Shape<a class="headerlink" href="#shape" title="Permalink to this heading"></a></h3>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.num_ant_BS">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">num_ant_BS</span></span><a class="headerlink" href="#params.num_ant_BS" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> [32, 1, 1]</p>
+<p>Number of antenna elements for the basestation arrays in the x,y,z-axes.</p>
+<p>An antenna array (ULA/UPA) of <code class="docutils literal notranslate"><span class="pre">num_ant_BS(1)</span> <span class="pre">x</span> <span class="pre">num_ant_BS(2)</span> <span class="pre">x</span> <span class="pre">num_ant_BS(3)</span></code> elements is adopted for each active basestation.</p>
+<p>The axes of the antennas match the axes of the ray-tracing scenario.</p>
+<ul>
+<li><p>If a 3D vector is given as input, all the active basestations adopt the same array.</p></li>
+<li><p>To set different array sizes for the active BSs, you can add multiple rows of antenna sizes.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>If we have 2 active basestations, to set two different array sizes we can apply the following.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">params</span><span class="p">.</span><span class="n">num_ant_BS</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">];</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]];</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.num_ant_UE">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">num_ant_UE</span></span><a class="headerlink" href="#params.num_ant_UE" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> [1, 1, 1]</p>
+<p>Number of antenna elements for the user arrays in the x,y,z-axes.</p>
+<p>An antenna array (ULA/UPA) of <code class="docutils literal notranslate"><span class="pre">num_ant_UE(1)</span> <span class="pre">x</span> <span class="pre">num_ant_UE(2)</span> <span class="pre">x</span> <span class="pre">num_ant_UE(3)</span></code> elements is adopted for each active UE.</p>
+<p>The axes of the antennas match the axes of the ray-tracing scenario.</p>
+</dd></dl>
+
+</section>
+<section id="spacing">
+<h3>Spacing<a class="headerlink" href="#spacing" title="Permalink to this heading"></a></h3>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.ant_spacing_BS">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">ant_spacing_BS</span></span><a class="headerlink" href="#params.ant_spacing_BS" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 0.5</p>
+<p>The spacing between the antenna array elements of the basestation is determined as <code class="docutils literal notranslate"><span class="pre">ant_spacing_BS</span> <span class="pre">x</span> <span class="pre">wavelength</span></code>.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.ant_spacing_UE">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">ant_spacing_UE</span></span><a class="headerlink" href="#params.ant_spacing_UE" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 0.5</p>
+<p>The spacing between the antenna array elements of the UEs is determined as <code class="docutils literal notranslate"><span class="pre">ant_spacing_UE</span> <span class="pre">x</span> <span class="pre">wavelength</span></code>.</p>
+</dd></dl>
+
+</section>
+<section id="rotation">
+<h3>Rotation<a class="headerlink" href="#rotation" title="Permalink to this heading"></a></h3>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.activate_array_rotation">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">activate_array_rotation</span></span><a class="headerlink" href="#params.activate_array_rotation" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 0</p>
+<p>Turn on/off the array rotation. Setting this parameter to <code class="docutils literal notranslate"><span class="pre">1</span></code> applies the rotation defined in <a class="reference internal" href="#params.array_rotation_BS" title="params.array_rotation_BS"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">params.array_rotation_BS</span></code></a> and <a class="reference internal" href="#params.array_rotation_UE" title="params.array_rotation_UE"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">params.array_rotation_UE</span></code></a>.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.array_rotation_BS">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">array_rotation_BS</span></span><a class="headerlink" href="#params.array_rotation_BS" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> [5, 10, 20]</p>
+<p>The BS antenna array rotation parameters, which consists of three rotation angles (in degrees). These angles rotate the BS antenna array in the given angles around the local x, y, z axes, respectively. To assign the same array rotation parameters to all active BSs, the following variable setting can be applied.</p>
+<ul>
+<li><p>If a 3D vector is given as input, all the active basestations adopt the same rotation values.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>To assign the same antenna rotation of angles <cite>x_rot</cite>, <cite>y_rot</cite>, <cite>z_rot</cite> to all active BSs, we can apply the following.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">params</span><span class="p">.</span><span class="n">array_rotation_BS</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">x_rot</span><span class="p">,</span><span class="w"> </span><span class="n">y_rot</span><span class="p">,</span><span class="w"> </span><span class="n">z_rot</span><span class="p">];</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>To set different antenna rotations for the active BSs, you can add multiple rows of rotations.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>To assign different array rotation parameters to each active BS, set an N x 3 matrix, with N being the number of active BSs. For instance, with two active BSs, the following variable setting can be applied.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">params</span><span class="p">.</span><span class="n">array_rotation_BS</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[[</span><span class="n">x_rot_1</span><span class="p">,</span><span class="w"> </span><span class="n">y_rot_1</span><span class="p">,</span><span class="w"> </span><span class="n">z_rot_1</span><span class="p">];</span><span class="w"></span>
+<span class="w">                            </span><span class="p">[</span><span class="n">x_rot_2</span><span class="p">,</span><span class="w"> </span><span class="n">y_rot_2</span><span class="p">,</span><span class="w"> </span><span class="n">z_rot_2</span><span class="p">]];</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.array_rotation_UE">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">array_rotation_UE</span></span><a class="headerlink" href="#params.array_rotation_UE" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> [0, 30, 0]</p>
+<p>The UE antenna array rotation parameters, which consists of three rotation angles (in degrees).
+These angles rotate the UE antenna array in the given angles around the local x, y, z axes, respectively.</p>
+<ul>
+<li><p>If a 3D vector is given as input, all UEs adopt the same rotation values.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>To assign the same antenna rotation of angles <cite>x_rot</cite>, <cite>y_rot</cite>, <cite>z_rot</cite> to all UEs, we can apply the following.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">params</span><span class="p">.</span><span class="n">array_rotation_BS</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">x_rot</span><span class="p">,</span><span class="w"> </span><span class="n">y_rot</span><span class="p">,</span><span class="w"> </span><span class="n">z_rot</span><span class="p">];</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>To set random antenna rotations for each UE, you can add three rows of rotations, each representing the minimum and maximum over x, y, z axes, respectively.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>To assign uniformly random array rotations to each UE, set a <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">x</span> <span class="pre">2</span></code> matrix, where the first column defines the lower limits of the uniform distribution, and the second column defines the upper limits. For instance, for each UE, uniformly random values between the minimum and the maximum limits can be assigned for the array rotation angles as follows.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">params</span><span class="p">.</span><span class="n">array_rotation_UE</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">x_rot_min</span><span class="p">,</span><span class="w"> </span><span class="n">x_rot_max</span><span class="p">;</span><span class="w"></span>
+<span class="w">                            </span><span class="n">y_rot_min</span><span class="p">,</span><span class="w"> </span><span class="n">y_rot_max</span><span class="p">;</span><span class="w"></span>
+<span class="w">                            </span><span class="n">z_rot_min</span><span class="p">,</span><span class="w"> </span><span class="n">z_rot_max</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+</section>
+</section>
+<section id="channel-properties">
+<h2>Channel Properties<a class="headerlink" href="#channel-properties" title="Permalink to this heading"></a></h2>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.num_paths">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">num_paths</span></span><a class="headerlink" href="#params.num_paths" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 25</p>
+<p>Maximum number of paths to be considered, e.g., choose <code class="docutils literal notranslate"><span class="pre">1</span></code> if you are only interested in the strongest path.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.generate_OFDM_channels">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">generate_OFDM_channels</span></span><a class="headerlink" href="#params.generate_OFDM_channels" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 1</p>
+<p>The indicator for OFDM or CIR output in the dataset.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> activates time domain (TD) channel impulse response generation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> activates frequency domain (FD) channel generation for OFDM systems.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.bandwidth">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">bandwidth</span></span><a class="headerlink" href="#params.bandwidth" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 0.05</p>
+<p>Total bandwidth of the channel in GHz.</p>
+</dd></dl>
+
+<section id="ofdm-options">
+<h3>OFDM Options<a class="headerlink" href="#ofdm-options" title="Permalink to this heading"></a></h3>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.num_OFDM">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">num_OFDM</span></span><a class="headerlink" href="#params.num_OFDM" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 512</p>
+<p>Number of OFDM subcarriers (e.g., <code class="docutils literal notranslate"><span class="pre">256</span></code>, <code class="docutils literal notranslate"><span class="pre">512</span></code>, <code class="docutils literal notranslate"><span class="pre">1024</span></code>).</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.OFDM_limit">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">OFDM_limit</span></span><a class="headerlink" href="#params.OFDM_limit" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 1</p>
+<p>The constructed channels will be calculated only at the sampled subcarriers to reduce the size of the dataset.
+The first OFDM_limit subcarriers are subsampled with <a class="reference internal" href="#params.OFDM_sampling_factor" title="params.OFDM_sampling_factor"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">params.OFDM_sampling_factor</span></code></a> spacing between the selected subcarriers.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.OFDM_sampling_factor">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">OFDM_sampling_factor</span></span><a class="headerlink" href="#params.OFDM_sampling_factor" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 1</p>
+<p>The subsampling spacing between generated subcarriers.</p>
+</dd></dl>
+
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">OFDM_limit</span> <span class="pre">=</span> <span class="pre">512</span></code>, <code class="docutils literal notranslate"><span class="pre">OFDM_limit</span> <span class="pre">=</span> <span class="pre">32</span></code> and <code class="docutils literal notranslate"><span class="pre">OFDM_sampling_factor</span> <span class="pre">=</span> <span class="pre">8</span></code>, the subcarriers <code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">9,</span> <span class="pre">17,</span> <span class="pre">25}</span></code> are subsampled from the available subcarriers <code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">2,</span> <span class="pre">…,</span> <span class="pre">512}</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The computation of subsampled subcarriers is implemented efficiently. Thus, only the selected subcarriers are computed by the generator.</p>
+</div>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="params.activate_RX_filter">
+<span class="sig-prename descclassname"><span class="pre">params.</span></span><span class="sig-name descname"><span class="pre">activate_RX_filter</span></span><a class="headerlink" href="#params.activate_RX_filter" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 0</p>
+<p>Turn on/off the receive LPF.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> No RX filter is applied.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> Ideal RX low-pass filter is applied. (ideal: Sinc in the time domain)</p></li>
+</ul>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="general.html" class="btn btn-neutral float-left" title="General Parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="radar.html" class="btn btn-neutral float-right" title="Radar Parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Umut Demirhan, Abdelrahman Taha, Ahmed Alkhateeb.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

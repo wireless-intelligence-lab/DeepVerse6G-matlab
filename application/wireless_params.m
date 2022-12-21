@@ -1,5 +1,5 @@
 % Antenna array dimensions
-params.num_ant_BS = [32, 1, 1];      % Number of antenna elements for the BS arrays in the x,y,z-axes
+params.num_ant_BS = [1, 1, 1];      % Number of antenna elements for the BS arrays in the x,y,z-axes
 % By defauly, all BSs will have the same array sizes
 % To define different array sizes for the selected active BSs, you can add multiple rows. 
 % Example: For two active BSs with a 8x4 y-z UPA in the first BS and 4x4
@@ -43,7 +43,7 @@ params.activate_RX_filter = 0;        % 0 No RX filter
 % Channel parameters # Activate OFDM
 params.generate_OFDM_channels = 1;    % 1: activate frequency domain (FD) channel generation for OFDM systems
                                       % 0: activate instead time domain (TD) channel impulse response generation
-params.num_paths = 25;                 % Maximum number of paths to be considered (a value between 1 and 25), e.g., choose 1 if you are only interested in the strongest path
+params.num_paths = 1;                 % Maximum number of paths to be considered (a value between 1 and 25), e.g., choose 1 if you are only interested in the strongest path
 
 % OFDM parameters
 params.num_OFDM = 512;                % Number of OFDM subcarriers

@@ -68,5 +68,3 @@ params.num_paths = 5;                 % Maximum number of paths to be considered
 params.num_OFDM = 512;                % Number of OFDM subcarriers
 params.OFDM_sampling_factor = 1;      % The constructed channels will be calculated only at the sampled subcarriers (to reduce the size of the dataset)
 params.OFDM_limit = 64;               % Only the first params.OFDM_limit subcarriers will be considered  
-
-params.saveDataset = 0;               % 0: Will return the dataset without saving it (highly recommended!) 

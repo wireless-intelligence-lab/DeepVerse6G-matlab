@@ -10,7 +10,7 @@ wv.wireless_parameters = 'wireless_params.m';
 wv.radar = false;
 wv.radar_parameters = 'radar_params.m';
 
-wv.camera = true;
+wv.camera = false;
 wv.camera_id = [1, 2, 3];
 
 wv.lidar = true;

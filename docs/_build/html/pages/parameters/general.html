@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>General Parameters &mdash; DeepVerse 6G 0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Wireless Parameters" href="wireless.html" />
+    <link rel="prev" title="Parameters" href="../parameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> DeepVerse 6G
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../parameters.html">Parameters</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">General Parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scenario-settings">Scenario Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensors">Sensors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wireless">Wireless</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#radar">Radar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#camera">Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lidar">Lidar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#position">Position</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wireless.html">Wireless Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radar.html">Radar Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">Dataset Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DeepVerse 6G</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../parameters.html">Parameters</a></li>
+      <li class="breadcrumb-item active">General Parameters</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/pages/parameters/general.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="general-parameters">
+<h1>General Parameters<a class="headerlink" href="#general-parameters" title="Permalink to this heading"></a></h1>
+<p>The general dataset parameters are defined in <code class="xref mat mat-mod docutils literal notranslate"><span class="pre">dv_params.m</span></code> file.
+These parameters are listed in detail as follows.</p>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.dataset_folder">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">dataset_folder</span></span><a class="headerlink" href="#dv.dataset_folder" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> ‘./scenarios/’</p>
+<p>The path of the extracted scenario folders. For example, if you have a folder named <code class="docutils literal notranslate"><span class="pre">DeepVerse_Scenarios</span></code> on the windows desktop, you may set
+<code class="docutils literal notranslate"><span class="pre">dv.dataset_folder</span> <span class="pre">=</span> <span class="pre">'C:\Users\username\Desktop\DeepVerse_Scenarios'</span></code>. This folder needs to contain the scenario folders extracted from the downloaded scenario zip files.</p>
+</dd></dl>
+
+<section id="scenario-settings">
+<h2>Scenario Settings<a class="headerlink" href="#scenario-settings" title="Permalink to this heading"></a></h2>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.scenario">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">scenario</span></span><a class="headerlink" href="#dv.scenario" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> ‘Scenario 1’</p>
+<p>The name of the scenario to be utilized in the dataset. The scenario folder name must be the same as the name given here.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.basestations">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">basestations</span></span><a class="headerlink" href="#dv.basestations" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> [1, 2, 3, 4]</p>
+<p>The ID of the basestations to be included in the dataset. The basestation IDs can be selected from the scenario description.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the final dataset, the activated basestations IDs are renumbered in the same order starting from 1 to the number of active basestations.</p>
+</div>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.scenes">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">scenes</span></span><a class="headerlink" href="#dv.scenes" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> [1:2000]</p>
+<p>Determines the range of the scenes (time-steps) to be loaded in the final dataset.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The number of available scenes and the duration consecutive scenes can be found in the corresponding scenario page.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="sensors">
+<h2>Sensors<a class="headerlink" href="#sensors" title="Permalink to this heading"></a></h2>
+<section id="wireless">
+<h3>Wireless<a class="headerlink" href="#wireless" title="Permalink to this heading"></a></h3>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.wireless">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">wireless</span></span><a class="headerlink" href="#dv.wireless" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 1</p>
+<p>The indicator for generating the wireless samples in the final dataset.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> generates the wireless channels and includes it in the final dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> does not include the wireless channels in the final dataset.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.wireless_parameters">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">wireless_parameters</span></span><a class="headerlink" href="#dv.wireless_parameters" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> ‘wireless_params.m’</p>
+<p>Name of the parameters file containing the wireless parameters. It is not utilized if the wireless channels are not activated with <a class="reference internal" href="#dv.wireless" title="dv.wireless"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">dv.wireless</span></code></a>.</p>
+</dd></dl>
+
+</section>
+<section id="radar">
+<h3>Radar<a class="headerlink" href="#radar" title="Permalink to this heading"></a></h3>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.radar">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">radar</span></span><a class="headerlink" href="#dv.radar" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 0</p>
+<p>The indicator for generating the FMCW radar samples in the final dataset.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> generates the wireless channels and includes it in the final dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> does not include the wireless channels in the final dataset.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.radar_parameters">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">radar_parameters</span></span><a class="headerlink" href="#dv.radar_parameters" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> ‘radar_params.m’</p>
+<p>Name of the parameters file containing the radar parameters. It is not utilized if the radar channels are not activated with <a class="reference internal" href="#dv.radar" title="dv.radar"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">dv.radar</span></code></a>.</p>
+</dd></dl>
+
+</section>
+<section id="camera">
+<h3>Camera<a class="headerlink" href="#camera" title="Permalink to this heading"></a></h3>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.camera">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">camera</span></span><a class="headerlink" href="#dv.camera" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 1</p>
+<p>The indicator for generating the RGB camera images in the final dataset.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> includes the RGB camera images in the final dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> does not include the RGB camera images in the final dataset.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.camera_id">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">camera_id</span></span><a class="headerlink" href="#dv.camera_id" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> [1, 2, 3]</p>
+<p>The IDs of the cameras to be included in the dataset. The camera IDs can be selected from the scenario description.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the final dataset, the activated cameras IDs are renumbered in the same order starting from 1 to the number of active cameras.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="lidar">
+<h3>Lidar<a class="headerlink" href="#lidar" title="Permalink to this heading"></a></h3>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.lidar">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">lidar</span></span><a class="headerlink" href="#dv.lidar" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 1</p>
+<p>The indicator for including the lidar point cloud data files in the final dataset.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> includes the lidar point cloud data in the final dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> does not include the lidar point cloud data in the final dataset.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="position">
+<h3>Position<a class="headerlink" href="#position" title="Permalink to this heading"></a></h3>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="dv.position">
+<span class="sig-prename descclassname"><span class="pre">dv.</span></span><span class="sig-name descname"><span class="pre">position</span></span><a class="headerlink" href="#dv.position" title="Permalink to this definition"></a></dt>
+<dd><p><cite>Default:</cite> 1</p>
+<p>The indicator for generating the position and trajectory information in the final dataset.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> includes the position in the final dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> does not include the position data in the final dataset.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../parameters.html" class="btn btn-neutral float-left" title="Parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="wireless.html" class="btn btn-neutral float-right" title="Wireless Parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Umut Demirhan, Abdelrahman Taha, Ahmed Alkhateeb.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
