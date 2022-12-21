@@ -1,5 +1,13 @@
-#################
-Dataset Structure
-#################
+#######
+Dataset
+#######
 
-The details of the parameters are presented below.
+In this section, we present the details of a generated dataset.
+
+.. toctree::
+   :maxdepth: 4
+   :glob:
+
+   ./dataset/summary
+   ./dataset/commands
+ 

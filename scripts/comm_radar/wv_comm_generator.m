@@ -22,24 +22,6 @@ function [COMM_dataset, params] = wv_comm_generator(params)
 
     COMM_dataset = COMM_scene;
     params = param;
-    saveDataset = params{1}.saveDataset;
-
-    % Saving the data
-    if saveDataset
-        fprintf('\n Saving the DeepMIMO Dataset ...')
-        
-        
-        fileidx = 1;
-        while isfile(sprintf('COMM_dataset/dataset_%i.mat', fileidx))
-            fileidx = fileidx + 1;
-        end
-        sfile_DeepMIMO = sprintf('COMM_dataset/dataset_%i.mat', fileidx);
-        dataset_params = params;
-        save(sfile_DeepMIMO,'COMM_dataset', 'dataset_params', '-v7.3');
-        
-        fprintf('\n The generated COMM dataset is saved into %s file.', sfile_DeepMIMO);
-        
-    end
 
     fprintf('\n COMM Dataset Generation completed \n')
 
