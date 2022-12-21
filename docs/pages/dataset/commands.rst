@@ -30,7 +30,7 @@ In the following, the generated dataset structure variable is names as ``dataset
 Wireless
 ========
 
-The wireless data is activated with :attr:dv.wireless. If this parameter is ``0``, the wireless fields will not be available.
+The wireless data is activated with :attr:`dv.wireless`. If this parameter is ``0``, the wireless fields will not be available.
 
 .. attribute:: dataset{s}.bsi.wireless.parameters
   
@@ -173,7 +173,7 @@ The wireless data is activated with :attr:dv.wireless. If this parameter is ``0`
 Radar
 =====
  
-The radar data is activated with :attr:dv.radar. If this parameter is ``0``, the radar fields will not be available.
+The radar data is activated with :attr:`dv.radar`. If this parameter is ``0``, the radar fields will not be available.
 
 .. attribute:: dataset{s}.bsi.radar.parameters
   
@@ -319,7 +319,7 @@ The radar data is activated with :attr:dv.radar. If this parameter is ``0``, the
 Image
 =====
 
-The RGB camera image data is activated with :attr:dv.camera. If this parameter is ``0``, the image fields will not be available.
+The RGB camera image data is activated with :attr:`dv.camera`. If this parameter is ``0``, the image fields will not be available.
 
 .. attribute:: dataset{s}.bsi.image
   
@@ -341,7 +341,7 @@ The RGB camera image data is activated with :attr:dv.camera. If this parameter i
 Lidar
 =====
 
-The lidar point cloud data (PCD) is activated with :attr:dv.lidar. If this parameter is ``0``, the lidar fields will not be available.
+The lidar point cloud data (PCD) is activated with :attr:`dv.lidar`. If this parameter is ``0``, the lidar fields will not be available.
 
 .. attribute:: dataset{s}.bsi.lidar
   
@@ -364,7 +364,7 @@ The lidar point cloud data (PCD) is activated with :attr:dv.lidar. If this param
 Position
 ========
 
-The trajectory data is activated with :attr:dv.position. If this parameter is ``0``, the trajectory fields will not be available. 
+The trajectory data is activated with :attr:`dv.position`. If this parameter is ``0``, the trajectory fields will not be available. 
 
 .. note::
 
