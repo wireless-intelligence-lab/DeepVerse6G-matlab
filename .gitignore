@@ -1,3 +1,6 @@
 DV_scenarios/
 docs/_build/
 *.asv
+*.pt
+**/models/*
+**/figures/*

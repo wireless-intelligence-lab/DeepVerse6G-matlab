@@ -1,7 +1,6 @@
-function [full_data, parameters] = load_and_validate_parameters(parameters_file)
-    run(parameters_file);
-    parameters = dv;
-    load(fullfile(parameters.dataset_folder, parameters.scenario, 'data_map.mat'));
+function [full_data, params] = load_and_validate_parameters(params)
+
+    load(fullfile(params.dataset_folder, params.scenario, 'data_map.mat'), 'full_data');
     
     % Validation to be added here
 end
