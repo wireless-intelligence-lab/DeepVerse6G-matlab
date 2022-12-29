@@ -3,7 +3,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
     params = read_params(parameters_file, 'dv');
     [full_data, params] = load_and_validate_parameters(params);
 
-    % Wireless 
+    %% Communication 
     % - Generated together for BS-BS channel possibility
     % - May be cleaned later
     if params.communication
@@ -18,7 +18,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         
         [comm_dataset, comm_params] = generate_comm(comm_params);
         
-        % Transfer data to dataset
+        % Transfer data to the dataset
         bs_count = 1;
         for bs=params.basestations
             for scene = 1:length(params.scenes)
@@ -30,7 +30,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         clear comm_dataset comm_params
     end
     
-    % Radar
+    %% Radar
     if params.radar
         radar_params = read_params(params.radar_parameters, 'radar', parameters_file);
         radar_params.active_BS = params.basestations;
@@ -43,7 +43,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         
         [radar_dataset, radar_params] = generate_radar(radar_params);
         
-        % Transfer data to WV dataset
+        % Transfer data to the dataset
         bs_count = 1;
         for bs=params.basestations
             bs_name = sprintf('bs%i', bs);
@@ -56,10 +56,12 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         clear radar_dataset radar_params
     end
     
+    %% Others
     bs_count = 1;
     for bs=params.basestations
         bs_name = sprintf('bs%i', bs);
         
+        % Camera
         if params.camera
             dataset{1}.bs{bs_count}.camera{1}.folder = fullfile(params.dataset_folder, params.scenario);
             cam_count = 1;
@@ -71,15 +73,19 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
                 cam_count = cam_count + 1;
             end
         end
+        
+        % Lidar
         if params.lidar
             for scene = 1:length(params.scenes)
                 dataset{scene}.bs{bs_count}.lidar{1}.data = full_data.(bs_name).lidar.data{params.scenes(scene)};
             end
         end
+        
+        % Traffic
         if params.position
             trajectory = load(fullfile(params.dataset_folder, params.scenario, full_data.trajectory));
             for scene = 1:length(params.scenes)
-                dataset{scene}.trajectory = trajectory.scene{params.scenes(scene)};
+                dataset{scene}.ue = trajectory.scene{params.scenes(scene)}.objects;
             end
         end
         
