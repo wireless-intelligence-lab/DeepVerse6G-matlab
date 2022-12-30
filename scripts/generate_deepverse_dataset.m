@@ -10,6 +10,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         comm_params = read_params(params.communication_parameters, 'comm', parameters_file);
         comm_params.active_BS = params.basestations;
         comm_params.dataset_folder = fullfile(params.dataset_folder, params.scenario, full_data.bs1.wireless.path);
+        comm_params.scenario_folder = fullfile(params.dataset_folder, params.scenario);
         comm_params.scenario = params.scenario;
         % Scene first - last to be updated to a list
         comm_params.scene_first = params.scenes(1);

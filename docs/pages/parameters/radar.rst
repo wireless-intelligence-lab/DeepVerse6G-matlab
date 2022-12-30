@@ -2,7 +2,7 @@
 Radar Parameters
 ^^^^^^^^^^^^^^^^^^^
 
-The wireless generation parameters are defined in :attr:`dv.radar_parameters` file. 
+The radar signal generation parameters are defined in :attr:`dv.radar_parameters` file. 
 These parameters are listed in detail as follows.
 
 Antenna Properties
@@ -11,7 +11,7 @@ Antenna Properties
 Shape
 -----
 
-.. attribute:: params.num_ant_TX
+.. attribute:: radar.num_ant_TX
   
   `Default:` |num_ant_TX|
   
@@ -31,9 +31,9 @@ Shape
 
 		.. code-block:: matlab
 
-			params.num_ant_TX = [[1, 8, 4]; [1, 4, 4]];
+			radar.num_ant_TX = [[1, 8, 4]; [1, 4, 4]];
 
-.. attribute:: params.num_ant_RX
+.. attribute:: radar.num_ant_RX
   
   `Default:` |num_ant_RX|
   
@@ -53,21 +53,21 @@ Shape
 
 		.. code-block:: matlab
 
-			params.num_ant_RX = [[1, 8, 4]; [1, 4, 4]];
+			radar.num_ant_RX = [[1, 8, 4]; [1, 4, 4]];
 
 
 
 Spacing
 -------
 
-.. attribute:: params.ant_spacing_TX
+.. attribute:: radar.ant_spacing_TX
   
   `Default:` |ant_spacing_TX|
   
   The spacing between the radar TX antenna array elements of the basestation is determined as ``ant_spacing_TX x wavelength``.
 
 
-.. attribute:: params.ant_spacing_RX
+.. attribute:: radar.ant_spacing_RX
   
   `Default:` |ant_spacing_RX|
   
@@ -75,14 +75,14 @@ Spacing
 
 Rotation
 --------
-.. attribute:: params.activate_radar_array_rotation
+.. attribute:: radar.activate_array_rotation
   
   `Default:` |activate_radar_array_rotation|
   
   Turn on/off the radar array rotation. 
-  Setting this parameter to ``1`` applies the rotation defined in :attr:`params.array_rotation_TX` and :attr:`params.array_rotation_RX`.
+  Setting this parameter to ``1`` applies the rotation defined in :attr:`radar.array_rotation_TX` and :attr:`radar.array_rotation_RX`.
   
-.. attribute:: params.array_rotation_TX
+.. attribute:: radar.array_rotation_TX
   
   `Default:` |array_rotation_TX|
   
@@ -96,7 +96,7 @@ Rotation
 
 	    .. code-block:: matlab
 
-		    params.array_rotation_TX = [x_rot, y_rot, z_rot];  
+		    radar.array_rotation_TX = [x_rot, y_rot, z_rot];  
 	
   * To set different antenna rotations for the active BSs, you can add multiple rows of rotations.
 
@@ -106,63 +106,63 @@ Rotation
 
 	    .. code-block:: matlab
 
-		    params.array_rotation_TX = [[x_rot_1, y_rot_1, z_rot_1]; 
+		    radar.array_rotation_TX = [[x_rot_1, y_rot_1, z_rot_1]; 
 						[x_rot_2, y_rot_2, z_rot_2]]; 
 	
 	
-.. attribute:: params.array_rotation_RX
+.. attribute:: radar.array_rotation_RX
   
   `Default:` |array_rotation_RX|
   
-  The parameter determines the rotation of radar RX antennas. The functionality is the same with :attr:`array_rotation_TX`, hence, the details are skipped.
+  The parameter determines the rotation of radar RX antennas. The functionality is the same with :attr:`radar.array_rotation_TX`, hence, the details are skipped.
 
 
 Chirp Characteristics
 =====================
 
-.. attribute:: params.S
+.. attribute:: radar.S
   
   `Default:` |S|
   
   
-.. attribute:: params.Fs
+.. attribute:: radar.Fs
   
   `Default:` |Fs|
   
-.. attribute:: params.N_ADC
+.. attribute:: radar.N_ADC
   
   `Default:` |N_ADC|
   
-.. attribute:: params.N_loop
+.. attribute:: radar.N_loop
   
   `Default:` |N_loop|
   
-.. attribute:: params.T_idle
+.. attribute:: radar.T_idle
   
   `Default:` |T_idle|
   
-.. attribute:: params.T_start
+.. attribute:: radar.T_start
   
   `Default:` |T_start|
   
-.. attribute:: params.T_excess
+.. attribute:: radar.T_excess
   
   `Default:` |T_excess|
   
-.. attribute:: params.duty_cycle
+.. attribute:: radar.duty_cycle
   
   `Default:` |duty_cycle|
   
 Computation Properties
 ======================
 
-.. attribute:: params.radar_channel_taps
+.. attribute:: radar.radar_channel_taps
   
   `Default:` |radar_channel_taps|
   
   Maximum number of paths to be considered, e.g., choose 1 if you are only interested in the strongest radar reflection path.
 
-.. attribute:: params.comp_speed
+.. attribute:: radar.comp_speed
   
   `Default:` |comp_speed|
   

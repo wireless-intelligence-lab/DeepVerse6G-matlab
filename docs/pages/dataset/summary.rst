@@ -13,16 +13,16 @@ The main structure is presented in the image below.
 The corresponding data shown in the figure can be accessed by adding the commands presented over the arrows. If we generate a dataset into a variable named ``dataset``, the wireless data of the ``s``-th scene and ``i``-th basestation can be accessed by ``dataset{s}.bsi.wireless``.
 Next, we present the details of different modality data.
 
-Wireless
-========
+Communication
+=============
 
-The wireless data of the ``s``-th scene and ``i``-th basestation can be accessed by the following command.
+The communication data of the ``s``-th scene and ``i``-th basestation can be accessed by the following command.
 
 .. code-block:: matlab
 
-	dataset{s}.bsi.wireless
+	dataset{s}.bs{i}.comm
 
-The wireless data is a struct with the fields as shown in the image below.
+The communication data is a struct with the fields as shown in the image below.
 
 .. image:: ../../images/wirelessdiagram.svg
   :width: 800
@@ -42,7 +42,7 @@ The radar data of the ``s``-th scene and ``i``-th basestation (as the transmitte
 
 .. code-block:: matlab
 
-	dataset{s}.bsi.radar
+	dataset{s}.bs{i}.radar
 
 The radar data is a struct with the fields as shown in the image below.
 
@@ -60,11 +60,11 @@ Each radar channel structure between transmitter ``BS i`` and receiver ``BS j`` 
 Image
 =====
 
-The RGB camera image data of the ``s``-th scene and ``i``-th basestation can be accessed by the following command.
+The RGB camera image data of the ``s``-th scene, ``i``-th basestation's ``j``-th camera can be accessed by the following command.
 
 .. code-block:: matlab
 
-	dataset{s}.bsi.image
+	dataset{s}.bs{i}.camera{j}
 	
 The camera data is a struct with the fields as shown in the image below.
 
@@ -76,11 +76,11 @@ The camera data is a struct with the fields as shown in the image below.
 Lidar
 =====
 
-The lidar data of the ``s``-th scene and ``i``-th basestation can be accessed by the following command.
+The lidar data of the ``s``-th scene, ``i``-th basestation's ``j``-th lidar can be accessed by the following command.
 
 .. code-block:: matlab
 
-	dataset{s}.bsi.lidar
+	dataset{s}.bs{i}.lidar{j}
 	
 The lidar data is a struct with the fields as shown in the image below.
 
@@ -89,15 +89,15 @@ The lidar data is a struct with the fields as shown in the image below.
   :alt: Lidar data structure
   :align: center
 
-Position
-========
+Traffic
+=======
 
-The position data is contained in the trajectory data, which includes the other relevant details of the traffic.
-The trajectory data of the ``s``-th scene can be accessed by the following command.
+The position data is contained in the traffic data, which includes the other relevant details of the traffic.
+The traffic data of the ``s``-th scene ``j``-th user can be accessed by the following command.
 
 .. code-block:: matlab
 
-	dataset{s}.trajectory
+	dataset{s}.ue{j}
 	
 The trajectory data is a struct with the fields as shown in the image below.
 

@@ -1,0 +1,26 @@
+/* https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs 
+
+and https://github.com/readthedocs/sphinx_rtd_theme/issues/295
+
+*/
+/*
+.wy-nav-content {
+    max-width: 1000px !important;
+}
+*/
+
+/* and fix wrap bug per https://rackerlabs.github.io/docs-rackspace/tools/rtd-tables.html */
+
+/*
+.wy-table-responsive table td {
+    white-space: normal !important;
+}
+
+.wy-table-responsive {
+    overflow: visible !important;
+}
+*/
+
+.wy-side-nav-search, .wy-nav-top {
+    background: #0b750a;
+}

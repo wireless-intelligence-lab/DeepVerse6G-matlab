@@ -2,7 +2,7 @@
 Wireless Parameters
 ^^^^^^^^^^^^^^^^^^^
 
-The wireless generation parameters are defined in :attr:`dv.wireless_parameters` file. 
+The communication channel generation parameters are defined in :attr:`dv.communication_parameters` file. 
 These parameters are listed in detail as follows.
 
 
@@ -12,7 +12,7 @@ Antenna Properties
 Shape
 -----
 
-.. attribute:: params.num_ant_BS
+.. attribute:: comm.num_ant_BS
   
   `Default:` |num_ant_BS|
   
@@ -32,9 +32,9 @@ Shape
 
 		.. code-block:: matlab
 
-			params.num_ant_BS = [[1, 8, 4]; [1, 4, 4]];
+			comm.num_ant_BS = [[1, 8, 4]; [1, 4, 4]];
 
-.. attribute:: params.num_ant_UE
+.. attribute:: comm.num_ant_UE
   
   `Default:` |num_ant_UE|
   
@@ -49,14 +49,14 @@ Shape
 Spacing
 -------
 
-.. attribute:: params.ant_spacing_BS
+.. attribute:: comm.ant_spacing_BS
   
   `Default:` |ant_spacing_BS|
   
   The spacing between the antenna array elements of the basestation is determined as ``ant_spacing_BS x wavelength``.
 
 
-.. attribute:: params.ant_spacing_UE
+.. attribute:: comm.ant_spacing_UE
   
   `Default:` |ant_spacing_UE|
   
@@ -64,14 +64,14 @@ Spacing
 
 Rotation
 --------
-.. attribute:: params.activate_array_rotation
+.. attribute:: comm.activate_array_rotation
   
   `Default:` |activate_array_rotation|
   
-  Turn on/off the array rotation. Setting this parameter to ``1`` applies the rotation defined in :attr:`params.array_rotation_BS` and :attr:`params.array_rotation_UE`.
+  Turn on/off the array rotation. Setting this parameter to ``1`` applies the rotation defined in :attr:`comm.array_rotation_BS` and :attr:`comm.array_rotation_UE`.
   
   
-.. attribute:: params.array_rotation_BS 
+.. attribute:: comm.array_rotation_BS 
   
   `Default:` |array_rotation_BS|
   
@@ -85,7 +85,7 @@ Rotation
 
 	    .. code-block:: matlab
 
-		    params.array_rotation_BS = [x_rot, y_rot, z_rot];  
+		    comm.array_rotation_BS = [x_rot, y_rot, z_rot];  
 	
   * To set different antenna rotations for the active BSs, you can add multiple rows of rotations.
 
@@ -95,11 +95,11 @@ Rotation
 
 	    .. code-block:: matlab
 
-		    params.array_rotation_BS = [[x_rot_1, y_rot_1, z_rot_1]; 
+		    comm.array_rotation_BS = [[x_rot_1, y_rot_1, z_rot_1]; 
 						[x_rot_2, y_rot_2, z_rot_2]]; 
 	
 	
-.. attribute:: params.array_rotation_UE
+.. attribute:: comm.array_rotation_UE
   
   `Default:` |array_rotation_UE|
   
@@ -114,7 +114,7 @@ Rotation
 
 	    .. code-block:: matlab
 
-		    params.array_rotation_BS = [x_rot, y_rot, z_rot];  
+		    comm.array_rotation_BS = [x_rot, y_rot, z_rot];  
 	
   * To set random antenna rotations for each UE, you can add three rows of rotations, each representing the minimum and maximum over x, y, z axes, respectively.
 
@@ -124,20 +124,20 @@ Rotation
 
 	    .. code-block:: matlab
 		
-		    params.array_rotation_UE = [x_rot_min, x_rot_max;
+		    comm.array_rotation_UE = [x_rot_min, x_rot_max;
 						y_rot_min, y_rot_max;
 						z_rot_min, z_rot_max] 
 	
 Channel Properties
 ==================
 
-.. attribute:: params.num_paths
+.. attribute:: comm.num_paths
   
   `Default:` |num_paths|
   
   Maximum number of paths to be considered, e.g., choose ``1`` if you are only interested in the strongest path.
 
-.. attribute:: params.generate_OFDM_channels
+.. attribute:: comm.generate_OFDM_channels
   
   `Default:` |generate_OFDM_channels|
   
@@ -147,7 +147,7 @@ Channel Properties
 
   * ``1`` activates frequency domain (FD) channel generation for OFDM systems.
   
-.. attribute:: params.bandwidth
+.. attribute:: comm.bandwidth
   
   `Default:` |bandwidth|
   
@@ -156,21 +156,21 @@ Channel Properties
 OFDM Options
 ------------
 
-.. attribute:: params.num_OFDM
+.. attribute:: comm.num_OFDM
   
   `Default:` |num_OFDM|
   
   Number of OFDM subcarriers (e.g., ``256``, ``512``, ``1024``). 
 
-.. attribute:: params.OFDM_limit
+.. attribute:: comm.OFDM_limit
   
   `Default:` |OFDM_limit|
   
   The constructed channels will be calculated only at the sampled subcarriers to reduce the size of the dataset. 
-  The first OFDM_limit subcarriers are subsampled with :attr:`params.OFDM_sampling_factor` spacing between the selected subcarriers.
+  The first OFDM_limit subcarriers are subsampled with :attr:`comm.OFDM_sampling_factor` spacing between the selected subcarriers.
 
 
-.. attribute:: params.OFDM_sampling_factor
+.. attribute:: comm.OFDM_sampling_factor
   
   `Default:` |OFDM_sampling_factor|
   
@@ -185,7 +185,7 @@ OFDM Options
 	The computation of subsampled subcarriers is implemented efficiently. Thus, only the selected subcarriers are computed by the generator.
 	
 
-.. attribute:: params.activate_RX_filter
+.. attribute:: comm.activate_RX_filter
   
   `Default:` |activate_RX_filter|
   

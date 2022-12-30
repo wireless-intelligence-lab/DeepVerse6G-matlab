@@ -45,23 +45,23 @@ Scenario Settings
 Sensors
 =======
 
-Wireless
---------
+Communication
+-------------
 
-.. attribute:: dv.wireless
+.. attribute:: dv.communication
   
   `Default:` |wireless|
   
-  The indicator for generating the wireless samples in the final dataset. 
+  The indicator for generating the communication channel samples in the final dataset. 
   
-  * ``1`` generates the wireless channels and includes it in the final dataset.
-  * ``0`` does not include the wireless channels in the final dataset.
+  * ``1`` generates the communication channels and includes it in the final dataset.
+  * ``0`` does not include the communication channels in the final dataset.
   
-.. attribute:: dv.wireless_parameters
+.. attribute:: dv.communication_parameters
   
   `Default:` |wireless_parameters|
   
-  Name of the parameters file containing the wireless parameters. It is not utilized if the wireless channels are not activated with :attr:`dv.wireless`.
+  Name of the parameters file containing the communication parameters. It is not utilized if the communication channels are not activated with :attr:`dv.communication`.
   
 Radar
 -----
@@ -72,14 +72,14 @@ Radar
   
   The indicator for generating the FMCW radar samples in the final dataset. 
   
-  * ``1`` generates the wireless channels and includes it in the final dataset.
-  * ``0`` does not include the wireless channels in the final dataset.
+  * ``1`` generates the radar signals and includes it in the final dataset.
+  * ``0`` does not include the radar signals in the final dataset.
   
 .. attribute:: dv.radar_parameters
   
   `Default:` |radar_parameters|
   
-  Name of the parameters file containing the radar parameters. It is not utilized if the radar channels are not activated with :attr:`dv.radar`.
+  Name of the parameters file containing the radar parameters. It is not utilized if the radar signals are not activated with :attr:`dv.radar`.
   
 Camera
 ------
