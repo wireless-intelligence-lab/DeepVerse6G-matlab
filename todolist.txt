@@ -1,10 +1,5 @@
 DeepMIMO fix..
 
-Shorten .basestation .user ..
-
-Shall we fix the ordering of the BSs? 
-- fix bsi-bs{i} problem
-
 Similarly, we may have user/BS/additional Lidars. Will be better to carry outside.
 - Put them into the outside structure.
 
@@ -14,12 +9,5 @@ Cameras do not necessarily belong to the basestations.
 How to accomodate dynamic/static users?
 -.SUE/.DUE? This fixes all the problems.
 Trajectory data would have the dynamic only. 
-
-Cleaning - remove WV change to DV
-
-Default parameter support
-
-Still single/multifile parameter structure
-- Both may be supported? 
 
 Update LoS status..

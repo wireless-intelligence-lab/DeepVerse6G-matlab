@@ -3,6 +3,25 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
     params = read_params(parameters_file, 'dv');
     [full_data, params] = load_and_validate_parameters(params);
 
+    %% Mobility
+    if params.position
+        trajectory = load(fullfile(params.dataset_folder, params.scenario, full_data.trajectory));
+        dataset.info.mobility.object_types = trajectory.object_info;
+        for scene = 1:length(params.scenes)
+            traffic_data = trajectory.scene{params.scenes(scene)}.objects;
+            for user = 1:length(traffic_data)
+                utdata = traffic_data{user};
+                dataset.scene{scene}.ue{user}.id = utdata.id;
+                dataset.scene{scene}.ue{user}.location = [utdata.x, utdata.y, utdata.tx_height];
+                utdata = rmfield(utdata, 'x');
+                utdata = rmfield(utdata, 'y');
+                utdata = rmfield(utdata, 'tx_height');
+                utdata = rmfield(utdata, 'id');
+                dataset.scene{scene}.ue{user}.mobility = utdata;
+            end
+        end
+    end
+
     %% Communication 
     % - Generated together for BS-BS channel possibility
     % - May be cleaned later
@@ -23,9 +42,15 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         bs_count = 1;
         for bs=params.basestations
             for scene = 1:length(params.scenes)
-                dataset{scene}.bs{bs_count}.comm = comm_dataset{scene}{bs_count};
-                dataset{scene}.bs{bs_count}.comm.parameters = comm_params{scene};
+                v = comm_dataset{scene}{bs_count};
+                if params.position
+                    for user = 1:length(v) % Move ID also to comm structure
+                        v.ue{user}.id = dataset.scene{scene}.ue{user}.id; 
+                    end
+                end
+                dataset.scene{scene}.bs{bs_count}.comm = v;
             end
+            dataset.info.comm.params = comm_params{1};
             bs_count = bs_count + 1;
         end
         clear comm_dataset comm_params
@@ -49,8 +74,8 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         for bs=params.basestations
             bs_name = sprintf('bs%i', bs);
             for scene = 1:length(params.scenes)
-                dataset{scene}.bs{bs_count}.radar = radar_dataset{scene}{bs_count};
-                dataset{scene}.bs{bs_count}.radar.parameters = radar_params{scene};
+                dataset.scene{scene}.bs{bs_count}.radar = radar_dataset{scene}{bs_count};
+                dataset.info.radar.params = radar_params{scene};
             end
             bs_count = bs_count + 1;
         end
@@ -58,18 +83,19 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
     end
     
     %% Others
+
     bs_count = 1;
     for bs=params.basestations
         bs_name = sprintf('bs%i', bs);
         
         % Camera
         if params.camera
-            dataset{1}.bs{bs_count}.camera{1}.folder = fullfile(params.dataset_folder, params.scenario);
+            dataset.info.scenario_folder = fullfile(params.dataset_folder, params.scenario);
             cam_count = 1;
             for cam = params.camera_id
                 cam_name = sprintf('cam%i', cam);
                 for scene = 1:length(params.scenes)
-                    dataset{scene}.bs{bs_count}.camera{cam_count}.data = full_data.(bs_name).image.(cam_name).data{params.scenes(scene)};
+                    dataset.scene{scene}.bs{bs_count}.cam{cam_count}.data = full_data.(bs_name).image.(cam_name).data{params.scenes(scene)};
                 end
                 cam_count = cam_count + 1;
             end
@@ -78,15 +104,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         % Lidar
         if params.lidar
             for scene = 1:length(params.scenes)
-                dataset{scene}.bs{bs_count}.lidar{1}.data = full_data.(bs_name).lidar.data{params.scenes(scene)};
-            end
-        end
-        
-        % Traffic
-        if params.position
-            trajectory = load(fullfile(params.dataset_folder, params.scenario, full_data.trajectory));
-            for scene = 1:length(params.scenes)
-                dataset{scene}.ue = trajectory.scene{params.scenes(scene)}.objects;
+                dataset.scene{scene}.bs{bs_count}.lidar{1}.data = full_data.(bs_name).lidar.data{params.scenes(scene)};
             end
         end
         

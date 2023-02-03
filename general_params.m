@@ -1,4 +1,4 @@
-dv.dataset_folder = '.\DV_Scenarios';
+dv.dataset_folder = '.\scenarios';
 dv.scenario = 'Scenario 1';
 
 dv.basestations = [2]; % Basestations to be included
