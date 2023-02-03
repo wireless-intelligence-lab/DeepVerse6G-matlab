@@ -49,6 +49,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
                     end
                 end
                 dataset.scene{scene}.bs{bs_count}.comm = v;
+                dataset.scene{scene}.bs{bs_count}.location = v.loc;
             end
             dataset.info.comm.params = comm_params{1};
             bs_count = bs_count + 1;
