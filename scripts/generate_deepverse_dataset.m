@@ -96,7 +96,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
             for cam = params.camera_id
                 cam_name = sprintf('cam%i', cam);
                 for scene = 1:length(params.scenes)
-                    dataset.scene{scene}.bs{bs_count}.cam{cam_count}.data = full_data.(bs_name).image.(cam_name).data{params.scenes(scene)};
+                    dataset.scene{scene}.bs{bs_count}.cam{cam_count} = full_data.(bs_name).image.(cam_name).data{params.scenes(scene)};
                 end
                 cam_count = cam_count + 1;
             end
@@ -105,7 +105,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         % Lidar
         if params.lidar
             for scene = 1:length(params.scenes)
-                dataset.scene{scene}.bs{bs_count}.lidar{1}.data = full_data.(bs_name).lidar.data{params.scenes(scene)};
+                dataset.scene{scene}.bs{bs_count}.lidar{1} = full_data.(bs_name).lidar.data{params.scenes(scene)};
             end
         end
         

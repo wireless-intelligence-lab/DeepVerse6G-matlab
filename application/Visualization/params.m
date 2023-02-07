@@ -1,5 +1,5 @@
 %% General Parameters
-dv.dataset_folder = '..\..\DV_Scenarios';
+dv.dataset_folder = '..\..\Scenarios';
 dv.scenario = 'Scenario 1';
 
 dv.basestations = [1:4]; % Basestations to be included
