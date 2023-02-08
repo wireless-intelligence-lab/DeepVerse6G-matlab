@@ -10,7 +10,7 @@ The main structure is presented in the image below.
   :width: 800
   :alt: Main dataset structure
 
-The corresponding data shown in the figure can be accessed by adding the commands presented over the arrows. If we generate a dataset into a variable named ``dataset``, the wireless data of the ``s``-th scene and ``i``-th basestation can be accessed by ``dataset{s}.bsi.wireless``.
+The corresponding data shown in the figure can be accessed by adding the commands presented over the arrows. If we generate a dataset into a variable named ``dataset``, the wireless data of the ``s``-th scene and ``i``-th basestation can be accessed by ``dataset.scene{s}.bs{i}.comm``.
 Next, we present the details of different modality data.
 
 Communication
@@ -20,7 +20,7 @@ The communication data of the ``s``-th scene and ``i``-th basestation can be acc
 
 .. code-block:: matlab
 
-	dataset{s}.bs{i}.comm
+	dataset.scene{s}.bs{i}.comm
 
 The communication data is a struct with the fields as shown in the image below.
 
@@ -42,7 +42,7 @@ The radar data of the ``s``-th scene and ``i``-th basestation (as the transmitte
 
 .. code-block:: matlab
 
-	dataset{s}.bs{i}.radar
+	dataset.scene{s}.bs{i}.radar
 
 The radar data is a struct with the fields as shown in the image below.
 
@@ -64,7 +64,7 @@ The RGB camera image data of the ``s``-th scene, ``i``-th basestation's ``j``-th
 
 .. code-block:: matlab
 
-	dataset{s}.bs{i}.camera{j}
+	dataset.scene{s}.bs{i}.cam{j}
 	
 The camera data is a struct with the fields as shown in the image below.
 
@@ -80,28 +80,11 @@ The lidar data of the ``s``-th scene, ``i``-th basestation's ``j``-th lidar can 
 
 .. code-block:: matlab
 
-	dataset{s}.bs{i}.lidar{j}
+	dataset.scene{s}.bs{i}.lidar{j}
 	
 The lidar data is a struct with the fields as shown in the image below.
 
 .. image:: ../../images/lidardiagram.svg
-  :width: 350
+  :width: 600
   :alt: Lidar data structure
-  :align: center
-
-Traffic
-=======
-
-The position data is contained in the traffic data, which includes the other relevant details of the traffic.
-The traffic data of the ``s``-th scene ``j``-th user can be accessed by the following command.
-
-.. code-block:: matlab
-
-	dataset{s}.ue{j}
-	
-The trajectory data is a struct with the fields as shown in the image below.
-
-.. image:: ../../images/positiondiagram.svg
-  :width: 500
-  :alt: Trajectory data structure
   :align: center

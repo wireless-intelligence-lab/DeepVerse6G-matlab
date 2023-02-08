@@ -62,7 +62,7 @@ z = sum(sum(y, 1), 2); % Clutter computation
 y = y - z; % Clutter cleaning
 y = fft(y, 128, 3); % Doppler FFT
 y = fft(y, 128, 1); % 128-point Angle FFT
-y = flip(fftshift(y, 1)); % FFTshift Angle Bins
+y = fftshift(y, 1); % FFTshift Angle Bins
 y = fftshift(y, 3); % FFTshift Doppler Bins
 
 % Plot Range-Angle Map
