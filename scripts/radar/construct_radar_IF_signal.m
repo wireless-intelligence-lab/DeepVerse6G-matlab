@@ -1,4 +1,4 @@
-% Authors:
+matlab% Authors:
 % Date: May 05, 2022
 % Goal: Encouraging research on ML/DL for sensing applications and
 % providing a benchmarking tool for the developed algorithms
@@ -103,87 +103,50 @@ function [IF_signal,radar_KPI]=construct_radar_IF_signal(tx_ant_size, tx_rotatio
     end
     time_fast = Ts*(0:1:(N_ADC-1)).';
 
-    switch params.comp_speed
-        case 5 %----- faster calculation with higher memory requirement (5D matrix calculation and 4D matrix output)
-            time_slow = time_fast + reshape(((0:1:(N_loop-1))*T_PRI),1,1,[]);
-            Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
-            Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
-            Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-            %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-            Extra_phase = exp(sqrt(-1)*double(channel_params.phase).*ang_conv);
-            Phase_terms = exp(sqrt(-1)*2*pi*( (F0_active.*(Tau_rt)) -(0.5.*params.S.*(Tau_rt.^2)) +(params.S.*time_fast.*Tau_rt)));
-            IF_mat = sqrt(double(power)).*conj(Extra_phase).*Phase_terms.*IF_sampling_mat; %%%% conjugate is based on the derivation we have reached for +sin(.) Quadrature signal as the input to the second mixer.
-    
+    if ismember(params.comp_speed, [5, 4, 3]) % Methods 3-5
+        time_slow = time_fast + reshape(((0:1:(N_loop-1))*T_PRI),1,1,[]);
+        Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
+        Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
+        Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
+        %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
+        Extra_phase = exp(sqrt(-1)*double(channel_params.phase).*ang_conv);
+        Phase_terms = exp(sqrt(-1)*2*pi*( (F0_active.*(Tau_rt)) -(0.5.*params.S.*(Tau_rt.^2)) +(params.S.*time_fast.*Tau_rt)));
+        IF_mat = sqrt(double(power)).*conj(Extra_phase).*Phase_terms.*IF_sampling_mat; %%%% conjugate is based on the derivation we have reached for +sin(.) Quadrature signal as the input to the second mixer.
+        
+        if params.comp_speed == 5 %----- faster calculation with higher memory requirement (5D matrix calculation and 4D matrix output)
             IF_signal = sum(reshape(array_response_RX, M_RX, 1, 1, num_paths, 1) .* reshape(array_response_TX, 1, M_TX, 1, num_paths, 1) .* reshape(IF_mat, 1, 1, N_ADC, num_paths, N_loop), 4);
             IF_signal = reshape(IF_signal, M_RX, M_TX, N_ADC, N_loop);
-    
-        case 4 %----- slower calculation with lower memory requirement (4D matrix calculation and 4D matrix output)
-            time_slow = time_fast + reshape(((0:1:(N_loop-1))*T_PRI),1,1,[]);
-            Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
-            Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
-            Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-            %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-            Extra_phase = exp(sqrt(-1)*double(channel_params.phase).*ang_conv);
-            Phase_terms = exp(sqrt(-1)*2*pi*( (F0_active.*(Tau_rt)) -(0.5.*params.S.*(Tau_rt.^2)) +(params.S.*time_fast.*Tau_rt)));
-            IF_mat = sqrt(double(power)).*conj(Extra_phase).*Phase_terms.*IF_sampling_mat; %%%% conjugate is based on the derivation we have reached for +sin(.) Quadrature signal as the input to the second mixer.
-    
+        elseif params.comp_speed == 4 %----- slower calculation with lower memory requirement (4D matrix calculation and 4D matrix output)
             IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
             for ll = 1:1:N_loop
                 IF_signal(:,:,:,ll)=sum(reshape(array_response_RX, M_RX, 1, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, 1, num_paths) .* reshape(IF_mat(:,:,ll), 1, 1, N_ADC, num_paths), 4);
             end
-    
-        case 3 %----- Much slower calculation with lower memory requirement (3D matrix calculation and 4D matrix output)
-            time_slow = time_fast + reshape(((0:1:(N_loop-1))*T_PRI),1,1,[]);
-            Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
-            Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
-            Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-            %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-            Extra_phase = exp(sqrt(-1)*double(channel_params.phase).*ang_conv);
-            Phase_terms = exp(sqrt(-1)*2*pi*( (F0_active.*(Tau_rt)) -(0.5.*params.S.*(Tau_rt.^2)) +(params.S.*time_fast.*Tau_rt)));
-            IF_mat = sqrt(double(power)).*conj(Extra_phase).*Phase_terms.*IF_sampling_mat; %%%% conjugate is based on the derivation we have reached for +sin(.) Quadrature signal as the input to the second mixer.
-    
+        else
             IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
             for aa = 1:1:N_ADC
                 for ll=1:1:N_loop
                     IF_signal(:,:,aa,ll)=sum(reshape(array_response_RX, M_RX, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, num_paths) .* reshape(IF_mat(aa,:,ll), 1, 1, num_paths), 3);
                 end
             end
-    
-        case 2 %----- Much slower calculation with lower memory requirement (4D matrix calculation and 4D matrix output) (2D IF_mat matrix)
-            IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
-            for ll = 1:1:N_loop
-                time_slow = time_fast + ((ll-1)*T_PRI) ;
-                Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
-                Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
-                Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-                %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-                Extra_phase = exp(sqrt(-1)*double(channel_params.phase).*ang_conv);
-                Phase_terms = exp(sqrt(-1)*2*pi*( (F0_active.*(Tau_rt)) -(0.5.*params.S.*(Tau_rt.^2)) +(params.S.*time_fast.*Tau_rt)));
-                IF_mat = sqrt(double(power)).*conj(Extra_phase).*Phase_terms.*IF_sampling_mat; %%%% conjugate is based on the new derivation we have reached for +sin(.) Quadrature carrier signal.
-    
+        end
+    else % Methods 1-2
+        IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
+        for ll = 1:1:N_loop
+            time_slow = time_fast + ((ll-1)*T_PRI) ;
+            Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
+            Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
+            Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
+            %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
+            Extra_phase = exp(sqrt(-1)*double(channel_params.phase).*ang_conv);
+            Phase_terms = exp(sqrt(-1)*2*pi*( (F0_active.*(Tau_rt)) -(0.5.*params.S.*(Tau_rt.^2)) +(params.S.*time_fast.*Tau_rt)));
+            IF_mat = sqrt(double(power)).*conj(Extra_phase).*Phase_terms.*IF_sampling_mat; %%%% conjugate is based on the new derivation we have reached for +sin(.) Quadrature carrier signal.
+            if params.comp_speed == 2
                 IF_signal(:,:,:,ll)=sum(reshape(array_response_RX, M_RX, 1, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, 1, num_paths) .* reshape(IF_mat, 1, 1, N_ADC, num_paths), 4);
-            end
-    
-        case 1 %----- Much much slower calculation with lower memory requirement (3D matrix calculation and 4D matrix output) (2D IF_mat matrix)
-            IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
-            for ll = 1:1:N_loop
-                time_slow = time_fast + ((ll-1)*T_PRI) ;
-                Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
-                Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
-                Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
-                %----- (a) additional traveling distance and (b) Doppler frequency affecting the phase terms
-                Extra_phase = exp(sqrt(-1)*double(channel_params.phase).*ang_conv);
-                Phase_terms = exp(sqrt(-1)*2*pi*( (F0_active.*(Tau_rt)) -(0.5.*params.S.*(Tau_rt.^2)) +(params.S.*time_fast.*Tau_rt)));
-                IF_mat = sqrt(double(power)).*conj(Extra_phase).*Phase_terms.*IF_sampling_mat; %%%% conjugate is based on the new derivation we have reached for +sin(.) Quadrature carrier signal.
-    
+            else
                 for aa = 1:1:N_ADC
                     IF_signal(:,:,aa,ll)=sum(reshape(array_response_RX, M_RX, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, num_paths) .* reshape(IF_mat(aa,:), 1, 1, num_paths), 3);
                 end
             end
-    
-        otherwise
-            disp('The parameter params.comp_speed is defined from 1 to 5. please change its value accordingly');
+        end
     end
-    % toc
-
 end

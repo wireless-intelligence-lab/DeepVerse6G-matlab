@@ -25,4 +25,6 @@ function [params_inner] = validate_params(params, params_inner)
     params_inner = check_ant_orientation(params, params_inner, 'activate_array_rotation', 'array_rotation_RX', 'num_active_BS');
     params_inner = check_ant_spacing(params, params_inner, 'ant_spacing_RX', 'num_active_BS');
        
+    assert(ismember(params.comp_speed, [1:5]), ...
+            "The parameter params.comp_speed is defined from 1 to 5. Please set a valid value.")
 end
