@@ -15,7 +15,7 @@ radar.T_start = 4.22e-6;
 radar.T_excess = 1e-6;
 radar.duty_cycle = 1;
 radar.F0 = 28e9 - radar.S*radar.T_start;
-radar.num_paths = 500; 
+%radar.num_paths = 500; 
 radar.radar_channel_taps = 1000; 
 radar.comp_speed = 5;
 

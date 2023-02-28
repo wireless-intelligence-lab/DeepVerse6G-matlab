@@ -4,37 +4,30 @@ addpath(genpath('../../scripts')) % DeepVerse Scripts
 %% Generate a Dataset
 dataset = generate_deepverse_dataset('params.m');
 
+%% Prepare Variables
+scenario_folder = dataset.info.scenario_folder; % Folder of the scenario
+scene_id = 1; % Select a scene
+bs_id = 3; % Select a BS
+ue_id = 1; % Select a UE
+
 %% Plot 2D UE and BS positions
-% set(0,'defaultLineMarkerSize',10)
-% set(0,'defaultLineLineWidth', 2)
-% set(0,'defaultAxesFontSize',12)
-% set(0,'defaultAxesFontName','Arial')
-% set(0,'defaultAxesLineWidth', 1)
-% set(0,'defaultTextFontSize', 12)
-% set(0,'defaultTextFontWeight', 'bold')
 figure;
 hold on;
-for bs_id = 1:length(dataset.scene{1}.bs)
-    x = dataset.scene{1}.bs{bs_id}.location(1);
-    y = dataset.scene{1}.bs{bs_id}.location(2);
+for bs_id = 1:length(dataset.scene{scene_id}.bs)
+    x = dataset.scene{scene_id}.bs{bs_id}.location(1);
+    y = dataset.scene{scene_id}.bs{bs_id}.location(2);
     plot(x, y, 'bo');
     text(x-14, y-1.2, strcat('BS ', num2str(bs_id)));
 end
-for ue_id = 1:length(dataset.scene{1}.ue)
-    x = dataset.scene{1}.ue{ue_id}.location(1);
-    y = dataset.scene{1}.ue{ue_id}.location(2);
+for ue_id = 1:length(dataset.scene{scene_id}.ue)
+    x = dataset.scene{scene_id}.ue{ue_id}.location(1);
+    y = dataset.scene{scene_id}.ue{ue_id}.location(2);
     plot(x, y, 'rx');
     text(x-7, y-1.2, strcat('UE ', num2str(ue_id)));
 end
 grid on;
 xlabel('x (m)');
 ylabel('y (m)');
-
-%% Prepare Variables
-scenario_folder = dataset.info.scenario_folder; % Folder of the scenario
-scene_id = 1; % Select a scene
-bs_id = 3; % Select a BS
-ue_id = 1; % Select a UE
 
 %% Show Camera Images
 figure;
@@ -76,7 +69,7 @@ title('Range-Angle Map');
 %% BS-UE Channel
 h = dataset.scene{scene_id}.bs{bs_id}.comm.ue{ue_id}.channel;
 figure;
-plot(pow2db(flip(abs(fft(h, 128)).^2)));
+plot(pow2db(abs(fftshift(fft(h, 128)).^2)));
 ylabel('Channel Gain (dB)')
 xlabel('Beam Index');
 grid on;

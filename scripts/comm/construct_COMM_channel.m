@@ -60,6 +60,12 @@ function [channel]=construct_COMM_channel(tx_ant_size, tx_rotation, tx_ant_spaci
     %Assuming the pulse shaping as a dirac delta function and no receive LPF
     if ~params.activate_RX_filter
         path_const=sqrt(power/params.num_OFDM).*exp(1j*params_user.phase*ang_conv).*exp(-1j*2*pi*(k/params.num_OFDM)*delay_normalized);
+        if params.doppler
+            delay = delay_normalized.*Ts;
+            Doppler_phase = exp(-1j*2*pi*params.carrier_freq*( ((params_user.Doppler_vel.*delay)./light_speed) + ((params_user.Doppler_acc.*(delay.^2))./(2*light_speed)) ));
+            path_const = path_const .* Doppler_phase;
+        end
+        
         channel = sum(reshape(array_response_RX, M_RX, 1, 1, []) .* reshape(array_response_TX, 1, M_TX, 1, []) .* reshape(path_const, 1, 1, num_sampled_subcarriers, []), 4);
     else
 
@@ -68,7 +74,14 @@ function [channel]=construct_COMM_channel(tx_ant_size, tx_rotation, tx_ant_spaci
 
         % Generate the pulse function
         LP_fn = pulse_sinc(d_ext.'-delay_normalized);
+        
         conv_vec = exp(1j*params_user.phase*ang_conv).*sqrt(power/params.num_OFDM) .* LP_fn; %Power of the paths and phase
+        
+        if params.doppler
+            d_time = Ts*(d_ext.');
+            Doppler_phase = exp(-1j*2*pi*params.carrier_freq*( ((params_user.Doppler_vel.*d_time)./light_speed) + ((params_user.Doppler_acc.*(d_time.^2))./(2*light_speed)) ));
+            conv_vec = conv_vec .* Doppler_phase; %Power of the paths and phase
+        end
 
         channel = sum(reshape(array_response_RX, M_RX, 1, 1, []) .* reshape(array_response_TX, 1, M_TX, 1, []) .* reshape(conv_vec, 1, 1, [], params_user.num_paths), 4);
         channel = sum(reshape(channel, M_RX, M_TX, 1, []) .* reshape(delay_d_conv, 1, 1, num_sampled_subcarriers, []), 4);
