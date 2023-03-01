@@ -40,17 +40,11 @@ radar.ant_spacing_RX = .5;           % ratio of the wavelength; for half wavelen
 %Chirp configuration parameters
 radar.S = 15e12;
 radar.Fs = 15e6;
-radar.N_ADC = 512;
-radar.N_loop = 128;  % Number of chirp bursts (minimum of 1)
-radar.T_idle = 7e-6;
-radar.T_start = 4.22e-6;
-radar.T_excess = 1e-6;
-radar.duty_cycle = 1;
-radar.F0 = 28e9 - radar.S*radar.T_start;
+radar.N_samples = 512;
+radar.N_chirp = 128;  % Number of chirp bursts (minimum of 1)
 
 % Channel parameter
 radar.num_paths = 500;                 % Maximum number of paths to be considered (starting from 1), e.g., choose 1 if you are only interested in the strongest path
-radar.radar_channel_taps = 1000; 
 
 % Computation parameter
 radar.comp_speed = 5;                 % control the compromise between computational speed and memory requirement 

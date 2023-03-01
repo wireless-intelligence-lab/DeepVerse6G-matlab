@@ -31,7 +31,8 @@ comm.generate_OFDM_channels = 1;
 comm.num_paths = 25;
 comm.num_OFDM = 512;
 comm.OFDM_sampling_factor = 1;
-comm.OFDM_limit = 1; 
+comm.OFDM_limit = 1;
+comm.enable_Doppler = 1;
 
 %% Radar
 radar.num_ant_TX = [1, 1, 1];
@@ -43,13 +44,7 @@ radar.ant_spacing_TX = .5;
 radar.ant_spacing_RX = .5;
 radar.S = 15e12;
 radar.Fs = 15e6;
-radar.N_ADC = 512;
-radar.N_loop = 128;
-radar.T_idle = 7e-6;
-radar.T_start = 4.22e-6;
-radar.T_excess = 1e-6;
-radar.duty_cycle = 1;
-radar.F0 = 28e9 - radar.S*radar.T_start;
+radar.N_samples = 512;
+radar.N_chirp = 128;
 radar.num_paths = 500;
-radar.radar_channel_taps = 1000; 
 radar.comp_speed = 5;

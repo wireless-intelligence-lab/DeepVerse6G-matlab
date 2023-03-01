@@ -45,3 +45,5 @@ comm.num_paths = 25;                 % Maximum number of paths to be considered 
 comm.num_OFDM = 512;                % Number of OFDM subcarriers
 comm.OFDM_sampling_factor = 1;      % The constructed channels will be calculated only at the sampled subcarriers (to reduce the size of the dataset)
 comm.OFDM_limit = 1;                % Only the first params.OFDM_limit subcarriers will be considered  
+
+comm.enable_Doppler = 1;            % Include Doppler shift in the channel generation

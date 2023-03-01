@@ -47,7 +47,7 @@ function radar_dataset = generate_data(radar_params, params_inner)
         for r = 1:radar_params.num_active_BS
 
             % Channel Construction
-            [radar_dataset{t}.bs{r}.IF_signal,radar_dataset{t}.bs{r}.radar_KPI]=construct_radar_IF_signal(params_inner.num_ant_TX(t, :), params_inner.array_rotation_TX(t,:), params_inner.ant_spacing_TX(t), radar_params.BS_ID_map(t,:), params_inner.num_ant_RX(r, :), params_inner.array_rotation_RX(r,:), params_inner.ant_spacing_RX(r), radar_params.BS_ID_map(r,:), TX{t}.channel_params_BSBS(r), radar_params);
+            radar_dataset{t}.bs{r}.signal = construct_radar_signal(params_inner.num_ant_TX(t, :), params_inner.array_rotation_TX(t,:), params_inner.ant_spacing_TX(t), radar_params.BS_ID_map(t,:), params_inner.num_ant_RX(r, :), params_inner.array_rotation_RX(r,:), params_inner.ant_spacing_RX(r), radar_params.BS_ID_map(r,:), TX{t}.channel_params_BSBS(r), radar_params);
             radar_dataset{t}.bs{r}.rotation = params_inner.array_rotation_RX(r, :);
 
             % Location, LOS status, distance, pathloss, and channel path parameters

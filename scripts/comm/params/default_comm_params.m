@@ -14,6 +14,7 @@ comm.num_paths = 25;
 comm.num_OFDM = 512;
 comm.OFDM_sampling_factor = 1;
 comm.OFDM_limit = 1;
+comm.enable_Doppler = 1;
 
 %%%% Additional Parameters for this file %%%%
 % Parameters that need to exist in the default params file
@@ -23,6 +24,7 @@ comm.scenario = [];
 comm.scene_first = [];
 comm.scene_last = [];
 comm.BS_ID_map = [];
+comm.scenario_folder = [];
 
 % Additional fields for the adapted generator (possibly to be cleaned)
 comm.num_active_users = 1;

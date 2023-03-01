@@ -5,7 +5,7 @@
 % ---------------------------------------------------------------------- %
 
 
-function [IF_signal,radar_KPI] = construct_radar_IF_signal(tx_ant_size, tx_rotation, tx_ant_spacing, tx_boresight, rx_ant_size, rx_rotation, rx_ant_spacing, rx_boresight, channel_params, params)
+function [IF_signal] = construct_radar_signal(tx_ant_size, tx_rotation, tx_ant_spacing, tx_boresight, rx_ant_size, rx_rotation, rx_ant_spacing, rx_boresight, channel_params, params)
 
     % These are to be added as variables
     % FoV for comm may be added
@@ -18,16 +18,14 @@ function [IF_signal,radar_KPI] = construct_radar_IF_signal(tx_ant_size, tx_rotat
     % user_ID_map = params.user_ID_map;
 
 
-    fc = params.fc;
     Fs = params.Fs;
-    Wavelength = physconst('LightSpeed')/fc;
     ang_conv=pi/180;
     Ts=1/Fs;
     T_PRI = params.T_PRI;
-    N_loop = params.N_loop;
-    N_ADC = params.N_ADC;
+    N_chirp = params.N_chirp;
+    N_samples = params.N_samples;
     num_paths = channel_params.num_paths;
-    F0_active = params.F0 + params.S*params.T_start;
+    F0_active = params.carrier_freq;
 
 
     % TX antenna parameters for a UPA structure
@@ -41,7 +39,7 @@ function [IF_signal,radar_KPI] = construct_radar_IF_signal(tx_ant_size, tx_rotat
     kd_RX=2*pi*rx_ant_spacing;
 
     if num_paths == 0
-        IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
+        IF_signal = complex(zeros(M_RX, M_TX, N_samples, N_chirp));
         return;
     end
 
@@ -70,33 +68,24 @@ function [IF_signal,radar_KPI] = construct_radar_IF_signal(tx_ant_size, tx_rotat
 
     % Account only for the channel within the user-specific channel tap length
     delay_normalized=channel_params.ToA/Ts;
-    delay_normalized(delay_normalized>(N_ADC-1)) = (N_ADC-1);
+    delay_normalized(delay_normalized>(N_samples-1)) = (N_samples-1);
     
     power = channel_params.power;
-    power(delay_normalized>(N_ADC-1)) = 0;
+    power(delay_normalized>(N_samples-1)) = 0;
 
-    % Account only for the channel paths within the field of view
-    tx_boresight = wrapTo180(tx_boresight([4 5])); %Select only the az and el boresight angles
-    rx_boresight = wrapTo180(rx_boresight([4 5])); %Select only the az and el boresight angles
+    % Filter paths outside of FoV
+    path_FoV_filter = antenna_FoV(DoD_phi, DoA_phi, DoD_theta, DoA_theta, tx_boresight, tx_FOV_az, tx_FOV_el, rx_boresight, rx_FOV_az, rx_FOV_el);
+    power(~path_FoV_filter) = 0;
 
-    tx_FOV_limit = [tx_boresight(1)-(tx_FOV_az/2) tx_boresight(1)+(tx_FOV_az/2) tx_boresight(2)-(tx_FOV_el/2) tx_boresight(2)+(tx_FOV_el/2)];
-    rx_FOV_limit = [rx_boresight(1)-(rx_FOV_az/2) rx_boresight(1)+(rx_FOV_az/2) rx_boresight(2)-(rx_FOV_az/2) rx_boresight(2)+(rx_FOV_az/2)];
-    DoD_cond = (DoD_phi>=tx_FOV_limit(1) & DoD_phi<=tx_FOV_limit(2)) & (DoD_theta>=tx_FOV_limit(3) & DoD_theta<=tx_FOV_limit(4));
-    DoA_cond = (DoA_phi>=rx_FOV_limit(1) & DoA_phi<=rx_FOV_limit(2)) & (DoA_theta>=rx_FOV_limit(3) & DoA_theta<=rx_FOV_limit(4));
-
-    Active_paths = DoD_cond & DoA_cond;
-    power(~Active_paths) = 0;
-
-    % received IF signal calculation
-    % tic
-    IF_sampling_mat = zeros(N_ADC,num_paths);
+    % Received signal calculation
+    IF_sampling_mat = zeros(N_samples,num_paths);
     for ll=1:1:num_paths
-        IF_sampling_mat((ceil(double(delay_normalized(ll)))+1):1:N_ADC,ll) = 1;
+        IF_sampling_mat((ceil(double(delay_normalized(ll)))+1):1:N_samples,ll) = 1;
     end
-    time_fast = Ts*(0:1:(N_ADC-1)).';
+    time_fast = Ts*(0:1:(N_samples-1)).';
 
     if ismember(params.comp_speed, [5, 4, 3]) % Methods 3-5
-        time_slow = time_fast + reshape(((0:1:(N_loop-1))*T_PRI),1,1,[]);
+        time_slow = time_fast + reshape(((0:1:(N_chirp-1))*T_PRI),1,1,[]);
         Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
         Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
         Tau_rt = (double(delay_normalized).*Ts) + Tau2_rt + Tau3_rt;
@@ -107,21 +96,21 @@ function [IF_signal,radar_KPI] = construct_radar_IF_signal(tx_ant_size, tx_rotat
         
         if params.comp_speed == 5 %----- faster calculation with higher memory requirement (5D matrix calculation and 4D matrix output)
             
-            IF_signal = sum(reshape(array_response_RX, M_RX, 1, 1, num_paths, 1) .* reshape(array_response_TX, 1, M_TX, 1, num_paths, 1) .* reshape(IF_mat, 1, 1, N_ADC, num_paths, N_loop), 4);
-            IF_signal = reshape(IF_signal, M_RX, M_TX, N_ADC, N_loop);
+            IF_signal = sum(reshape(array_response_RX, M_RX, 1, 1, num_paths, 1) .* reshape(array_response_TX, 1, M_TX, 1, num_paths, 1) .* reshape(IF_mat, 1, 1, N_samples, num_paths, N_chirp), 4);
+            IF_signal = reshape(IF_signal, M_RX, M_TX, N_samples, N_chirp);
             
         elseif params.comp_speed == 4 %----- slower calculation with lower memory requirement (4D matrix calculation and 4D matrix output)
             
-            IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
-            for ll = 1:1:N_loop
-                IF_signal(:,:,:,ll)=sum(reshape(array_response_RX, M_RX, 1, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, 1, num_paths) .* reshape(IF_mat(:,:,ll), 1, 1, N_ADC, num_paths), 4);
+            IF_signal = complex(zeros(M_RX, M_TX, N_samples, N_chirp));
+            for ll = 1:1:N_chirp
+                IF_signal(:,:,:,ll)=sum(reshape(array_response_RX, M_RX, 1, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, 1, num_paths) .* reshape(IF_mat(:,:,ll), 1, 1, N_samples, num_paths), 4);
             end
             
         else
             
-            IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
-            for aa = 1:1:N_ADC
-                for ll=1:1:N_loop
+            IF_signal = complex(zeros(M_RX, M_TX, N_samples, N_chirp));
+            for aa = 1:1:N_samples
+                for ll=1:1:N_chirp
                     IF_signal(:,:,aa,ll)=sum(reshape(array_response_RX, M_RX, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, num_paths) .* reshape(IF_mat(aa,:,ll), 1, 1, num_paths), 3);
                 end
             end
@@ -129,9 +118,9 @@ function [IF_signal,radar_KPI] = construct_radar_IF_signal(tx_ant_size, tx_rotat
         end
     else % Methods 1-2
         
-        IF_signal = complex(zeros(M_RX, M_TX, N_ADC, N_loop));
+        IF_signal = complex(zeros(M_RX, M_TX, N_samples, N_chirp));
         
-        for ll = 1:1:N_loop
+        for ll = 1:1:N_chirp
             time_slow = time_fast + ((ll-1)*T_PRI) ;
             Tau3_rt = ((double(channel_params.Doppler_acc).*(time_slow.^2))./(2*physconst('LightSpeed')));
             Tau2_rt = ((double(channel_params.Doppler_vel).*time_slow)./physconst('LightSpeed'));
@@ -141,9 +130,9 @@ function [IF_signal,radar_KPI] = construct_radar_IF_signal(tx_ant_size, tx_rotat
             IF_mat = sqrt(double(power)).*conj(Extra_phase).*Phase_terms.*IF_sampling_mat; %%%% conjugate is based on the new derivation we have reached for +sin(.) Quadrature carrier signal.
             
             if params.comp_speed == 2
-                IF_signal(:,:,:,ll)=sum(reshape(array_response_RX, M_RX, 1, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, 1, num_paths) .* reshape(IF_mat, 1, 1, N_ADC, num_paths), 4);
+                IF_signal(:,:,:,ll)=sum(reshape(array_response_RX, M_RX, 1, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, 1, num_paths) .* reshape(IF_mat, 1, 1, N_samples, num_paths), 4);
             else
-                for aa = 1:1:N_ADC
+                for aa = 1:1:N_samples
                     IF_signal(:,:,aa,ll)=sum(reshape(array_response_RX, M_RX, 1, num_paths) .* reshape(array_response_TX, 1, M_TX, num_paths) .* reshape(IF_mat(aa,:), 1, 1, num_paths), 3);
                 end
             end

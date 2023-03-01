@@ -13,17 +13,17 @@ ue_id = 1; % Select a UE
 %% Plot 2D UE and BS positions
 figure;
 hold on;
-for bs_id = 1:length(dataset.scene{scene_id}.bs)
-    x = dataset.scene{scene_id}.bs{bs_id}.location(1);
-    y = dataset.scene{scene_id}.bs{bs_id}.location(2);
+for bs_idx = 1:length(dataset.scene{scene_id}.bs)
+    x = dataset.scene{scene_id}.bs{bs_idx}.location(1);
+    y = dataset.scene{scene_id}.bs{bs_idx}.location(2);
     plot(x, y, 'bo');
-    text(x-14, y-1.2, strcat('BS ', num2str(bs_id)));
+    text(x-14, y-1.2, strcat('BS ', num2str(bs_idx)));
 end
-for ue_id = 1:length(dataset.scene{scene_id}.ue)
-    x = dataset.scene{scene_id}.ue{ue_id}.location(1);
-    y = dataset.scene{scene_id}.ue{ue_id}.location(2);
+for ue_idx = 1:length(dataset.scene{scene_id}.ue)
+    x = dataset.scene{scene_id}.ue{ue_idx}.location(1);
+    y = dataset.scene{scene_id}.ue{ue_idx}.location(2);
     plot(x, y, 'rx');
-    text(x-7, y-1.2, strcat('UE ', num2str(ue_id)));
+    text(x-7, y-1.2, strcat('UE ', num2str(ue_idx)));
 end
 grid on;
 xlabel('x (m)');
@@ -46,7 +46,7 @@ ptCloud = pcread(pcd_path);
 pcshow(ptCloud);
 
 %% Radar
-y = dataset.scene{scene_id}.bs{bs_id}.radar.bs{bs_id}.IF_signal; % Radar signal from BS2 to BS2
+y = dataset.scene{scene_id}.bs{bs_id}.radar.bs{bs_id}.signal; % Radar signal from BS2 to BS2
 y = squeeze(y);
 
 % Radar Signal Processing
