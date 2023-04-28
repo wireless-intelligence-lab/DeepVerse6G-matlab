@@ -2,13 +2,13 @@
 dv.dataset_folder = '.\scenarios';
 dv.scenario = 'Scenario 1';
 
-dv.basestations = [2]; % Basestations to be included
-dv.scenes = [100:102]; % Scenes to be included
-    
+dv.basestations = [3]; % Basestations to be included
+dv.scenes=[1:2000];
+
 dv.communication = true;
 dv.communication_parameters = '';
 
-dv.radar = true;
+dv.radar = false;
 dv.radar_parameters = '';
 
 dv.camera = true;
@@ -18,21 +18,21 @@ dv.lidar = true;
 dv.position = true;
 
 %% Comm
-comm.num_ant_BS = [32, 1, 1];
+comm.num_ant_BS = [16, 1, 4];
 comm.num_ant_UE = [1, 1, 1];
 comm.activate_array_rotation = 0;
 comm.array_rotation_BS = [5, 10, 20];
 comm.array_rotation_UE = [0, 30, 0];
 comm.ant_spacing_BS = .5;
 comm.ant_spacing_UE = .5;
-comm.bandwidth = 0.05;
+comm.bandwidth = 0.02;
 comm.activate_RX_filter = 0;
 comm.generate_OFDM_channels = 1;
 comm.num_paths = 25;
-comm.num_OFDM = 512;
+comm.num_OFDM = 64;
 comm.OFDM_sampling_factor = 1;
-comm.OFDM_limit = 1;
-comm.enable_Doppler = 1;
+comm.OFDM_limit = 64;
+comm.enable_Doppler = 0;
 
 %% Radar
 radar.num_ant_TX = [1, 1, 1];
@@ -46,5 +46,5 @@ radar.S = 15e12;
 radar.Fs = 15e6;
 radar.N_samples = 512;
 radar.N_chirp = 128;
-radar.num_paths = 500;
+radar.num_paths = 5000;
 radar.comp_speed = 5;

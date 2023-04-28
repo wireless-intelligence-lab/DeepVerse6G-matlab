@@ -44,7 +44,7 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
             for scene = 1:length(params.scenes)
                 v = comm_dataset{scene}{bs_count};
                 if params.position
-                    for user = 1:length(v) % Move ID also to comm structure
+                    for user = 1:length(v.ue) % Move ID also to comm structure
                         v.ue{user}.id = dataset.scene{scene}.ue{user}.id; 
                     end
                 end

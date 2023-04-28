@@ -9,10 +9,10 @@ function [IF_signal] = construct_radar_signal(tx_ant_size, tx_rotation, tx_ant_s
 
     % These are to be added as variables
     % FoV for comm may be added
-    tx_FOV_az = 120; %azimuth FOV in degrees %%%%%%%&&&&%%%%%%%
-    tx_FOV_el = 60;  %elevation FOV in degrees %%%%%%%&&&&%%%%%%%
-    rx_FOV_az = 120; %azimuth FOV in degrees %%%%%%%&&&&%%%%%%%
-    rx_FOV_el = 60;  %elevation FOV in degrees %%%%%%%&&&&%%%%%%%
+    tx_FOV_az = 180; %azimuth FOV in degrees %%%%%%%&&&&%%%%%%%
+    tx_FOV_el = 90;  %elevation FOV in degrees %%%%%%%&&&&%%%%%%%
+    rx_FOV_az = 180; %azimuth FOV in degrees %%%%%%%&&&&%%%%%%%
+    rx_FOV_el = 90;  %elevation FOV in degrees %%%%%%%&&&&%%%%%%%
 
     % BS_ID_map = params.BS_ID_map;
     % user_ID_map = params.user_ID_map;
