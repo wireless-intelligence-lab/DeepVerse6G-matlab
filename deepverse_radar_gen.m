@@ -18,18 +18,9 @@ for scene_list = [1:jump:2000]
         scene_data = dataset.scene{s};
 
         y = dataset.scene{s}.bs{1}.radar.bs{1}.signal;
-        y = squeeze(y);
+        data = squeeze(y);
 
-        % Radar Signal Processing
-        y = fft(y, 512, 2); % Range FFT
-        z = sum(sum(y, 1), 2); % Clutter computation
-        y = y - z; % Clutter cleaning
-        y = fft(y, 128, 3); % Doppler FFT
-        y = fft(y, 128, 1); % 128-point Angle FFT
-        y = fftshift(y, 1); % FFTshift Angle Bins
-        y = fftshift(y, 3); % FFTshift Doppler Bins
-        ra = squeeze(sum(abs(y), 3))';
-        save(sprintf("./challenge_data/radar/%i.mat", scene_list+s-2),'ra')
+        save(sprintf("./video_data/radar/%i.mat", scene_list+s-2), 'data')
     end
 end
 %     channel_paths{data_counter} = sprintf("./wireless/%i.mat", data_counter);

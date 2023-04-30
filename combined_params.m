@@ -3,22 +3,22 @@ dv.dataset_folder = '.\scenarios';
 dv.scenario = 'Scenario 1';
 
 dv.basestations = [3]; % Basestations to be included
-dv.scenes=[1:2000];
+dv.scenes=[1996:2000];
 
-dv.communication = true;
+dv.communication = false;
 dv.communication_parameters = '';
 
-dv.radar = false;
+dv.radar = true;
 dv.radar_parameters = '';
 
-dv.camera = true;
+dv.camera = false;
 dv.camera_id = [1, 2, 3];
 
-dv.lidar = true;
-dv.position = true;
+dv.lidar = false;
+dv.position = false;
 
 %% Comm
-comm.num_ant_BS = [16, 1, 4];
+comm.num_ant_BS = [64, 1, 1];
 comm.num_ant_UE = [1, 1, 1];
 comm.activate_array_rotation = 0;
 comm.array_rotation_BS = [5, 10, 20];
