@@ -1,21 +1,21 @@
 %% General Parameters
 dv.dataset_folder = '.\scenarios';
-dv.scenario = 'Scenario 1';
+dv.scenario = 'DT1';
 
-dv.basestations = [2]; % Basestations to be included
-dv.scenes = [100:102]; % Scenes to be included
+dv.basestations = [1]; % Basestations to be included
+dv.scenes = [10:12]; % Scenes to be included
     
 dv.communication = true;
 dv.communication_parameters = '';
 
-dv.radar = true;
+dv.radar = false;
 dv.radar_parameters = '';
 
-dv.camera = true;
+dv.camera = false;
 dv.camera_id = [1, 2, 3];
 
-dv.lidar = true;
-dv.position = true;
+dv.lidar = false;
+dv.position = false;
 
 %% Comm
 comm.num_ant_BS = [32, 1, 1];

@@ -4,3 +4,6 @@ docs/_build/
 **/models/*
 **/figures/*
 scenarios/*
+challenge_data/*
+video_data/*
+*.rar
