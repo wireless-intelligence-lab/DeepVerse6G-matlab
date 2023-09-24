@@ -16,13 +16,15 @@ end
 
 function [params_inner] = validate_params(params, params_inner)
     % Check UE antenna
-    assert(size(params.num_ant_UE, 2) == 3, 'The defined user antenna panel size must be 3 dimensional (in x-y-z)')
-    params_inner = check_ant_orientation_random(params, params_inner, 'activate_array_rotation', 'array_rotation_UE', 'num_active_users');
+    assert(size(params.num_ant_UE, 2) == 2, 'The defined user antenna panel size must be 2 dimensional (in horizontal-vertical)')
+    params_inner = check_ant_orientation_random(params, params_inner, 'array_rotation_UE', 'num_active_users');
     assert(isscalar(params.ant_spacing_UE), 'The UE antenna spacing must be a scalar.');
-    
+    assert(size(params.ant_FoV_UE, 2) == 2, 'The defined user antenna FoV size must be 2 dimensional (in horizontal-vertical)')
+
     % Check BS antenna
     params_inner = check_ant_size(params, params_inner, 'num_ant_BS', 'num_active_BS');
-    params_inner = check_ant_orientation(params, params_inner, 'activate_array_rotation', 'array_rotation_BS', 'num_active_BS');
+    params_inner = check_ant_orientation(params, params_inner, 'array_rotation_BS', 'num_active_BS');
     params_inner = check_ant_spacing(params, params_inner, 'ant_spacing_BS', 'num_active_BS');
+    params_inner = check_ant_FoV(params, params_inner, 'ant_FoV_BS', 'num_active_BS');
     
 end

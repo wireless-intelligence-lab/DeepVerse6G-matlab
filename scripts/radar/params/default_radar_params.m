@@ -1,9 +1,11 @@
 %%%% DeepVerse Default Radar Parameters %%%%
-radar.num_ant_TX = [1, 1, 1];
-radar.num_ant_RX = [16, 1, 1];
+radar.num_ant_TX = [1, 1];
+radar.num_ant_RX = [16, 1];
 radar.activate_array_rotation = 0;
 radar.array_rotation_TX = [5, 10, 20];         
 radar.array_rotation_RX = [5, 10, 20]; 
+radar.ant_FoV_TX = [360, 180];
+radar.ant_FoV_RX = [360, 180];
 radar.ant_spacing_TX = .5; 
 radar.ant_spacing_RX = .5;
 radar.S = 15e12;

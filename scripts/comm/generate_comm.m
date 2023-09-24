@@ -32,7 +32,7 @@ function COMM_dataset = generate_data(params, params_inner)
     for t=1:params.num_active_BS
         bs_ID = params.active_BS(t);
         % fprintf('\n Basestation %i', bs_ID);
-        [TX{t}.channel_params, TX{t}.channel_params_BSBS, TX{t}.loc] = read_raytracing(bs_ID, params, params_inner.scenario_files, 1);
+        [TX{t}.channel_params, TX{t}.channel_params_BSBS, TX{t}.loc] = read_raytracing(bs_ID, params, params_inner, 1);
     end
 
     % Constructing the channel matrices from ray-tracing
@@ -50,7 +50,9 @@ function COMM_dataset = generate_data(params, params_inner)
             % Channel Construction
 
             if params.generate_OFDM_channels
-                [COMM_dataset{t}.ue{user}.channel]=construct_COMM_channel(params_inner.num_ant_BS(t, :), params_inner.array_rotation_BS(t,:), params_inner.ant_spacing_BS(t), params.num_ant_UE, params_inner.array_rotation_UE(1, :), params.ant_spacing_UE, TX{t}.channel_params(user), params);
+                %construct_COMM_channel(tx_ant_size, tx_rotation, tx_FoV, tx_ant_spacing, rx_ant_size, rx_rotation, rx_FoV, rx_ant_spacing, path_params, params, params_inner)
+
+                [COMM_dataset{t}.ue{user}.channel, channel_LoS_status, TX{t}.channel_params(user)]=construct_COMM_channel(params_inner.num_ant_BS(t, :), params_inner.array_rotation_BS(t,:), params_inner.ant_FoV_BS(t,:), params_inner.ant_spacing_BS(t), params.num_ant_UE, params_inner.array_rotation_UE(1, :), params.ant_FoV_UE, params.ant_spacing_UE, TX{t}.channel_params(user), params);
             else
                 [COMM_dataset{t}.ue{user}.channel]=construct_COMM_channel_TD(params_inner.num_ant_BS(t, :), params_inner.array_rotation_BS(t,:), params_inner.ant_spacing_BS(t), params.num_ant_UE, params_inner.array_rotation_UE(1, :), params.ant_spacing_UE, TX{t}.channel_params(user), params);
                 COMM_dataset{t}.ue{user}.ToA = TX{t}.channel_params(user).ToA; %Time of Arrival/Flight of each channel path (seconds)
@@ -59,7 +61,7 @@ function COMM_dataset = generate_data(params, params_inner)
 
             % Location, LOS status, distance, pathloss, and channel path parameters
             COMM_dataset{t}.ue{user}.loc=TX{t}.channel_params(user).loc;
-            COMM_dataset{t}.ue{user}.LoS_status=TX{t}.channel_params(user).LoS_status;
+            COMM_dataset{t}.ue{user}.LoS_status = channel_LoS_status;
             COMM_dataset{t}.ue{user}.distance=TX{t}.channel_params(user).distance;
             COMM_dataset{t}.ue{user}.pathloss=TX{t}.channel_params(user).pathloss;
             COMM_dataset{t}.ue{user}.path_params=rmfield(TX{t}.channel_params(user),{'loc','distance','pathloss'});
@@ -72,16 +74,16 @@ function COMM_dataset = generate_data(params, params_inner)
             for BSreceiver=1:params.num_active_BS
                 % Channel Construction
                 if params.generate_OFDM_channels
-                    [COMM_dataset{t}.bs{BSreceiver}.channel]=construct_COMM_channel(params_inner.num_ant_BS(t, :), params_inner.array_rotation_BS(t,:), params_inner.ant_spacing_BS(t), params_inner.num_ant_BS(BSreceiver, :), params_inner.array_rotation_BS(BSreceiver,:), params_inner.ant_spacing_BS(BSreceiver), TX{t}.channel_params_BSBS(BSreceiver), params);
+                    [COMM_dataset{t}.bs{BSreceiver}.channel, channel_LoS_status, TX{t}.channel_params_BSBS(BSreceiver)]=construct_COMM_channel(params_inner.num_ant_BS(t, :), params_inner.array_rotation_BS(t,:), params_inner.ant_FoV_BS(t,:), params_inner.ant_spacing_BS(t), params_inner.num_ant_BS(BSreceiver, :), params_inner.array_rotation_BS(BSreceiver,:), params_inner.ant_FoV_BS(BSreceiver,:), params_inner.ant_spacing_BS(BSreceiver), TX{t}.channel_params_BSBS(BSreceiver), params);
                 else
-                    [COMM_dataset{t}.bs{BSreceiver}.channel]=construct_COMM_channel_TD(params_inner.num_ant_BS(t, :), params_inner.array_rotation_BS(t,:), params_inner.ant_spacing_BS(t), params_inner.num_ant_BS(BSreceiver, :), params_inner.array_rotation_BS(BSreceiver,:), params_inner.ant_spacing_BS(BSreceiver), TX{t}.channel_params_BSBS(BSreceiver), params);
+                    [COMM_dataset{t}.bs{BSreceiver}.channel] = construct_COMM_channel_TD(params_inner.num_ant_BS(t, :), params_inner.array_rotation_BS(t,:), params_inner.ant_spacing_BS(t), params_inner.num_ant_BS(BSreceiver, :), params_inner.array_rotation_BS(BSreceiver,:), params_inner.ant_spacing_BS(BSreceiver), TX{t}.channel_params_BSBS(BSreceiver), params);
                     COMM_dataset{t}.bs{BSreceiver}.ToA=TX{t}.channel_params_BSBS(BSreceiver).ToA; %Time of Arrival/Flight of each channel path (seconds)
                 end
                 COMM_dataset{t}.bs{BSreceiver}.rotation = params_inner.array_rotation_BS(BSreceiver, :);
 
                 % Location, LOS status, distance, pathloss, and channel path parameters
                 COMM_dataset{t}.bs{BSreceiver}.loc=TX{t}.channel_params_BSBS(BSreceiver).loc;
-                COMM_dataset{t}.bs{BSreceiver}.LoS_status=TX{t}.channel_params_BSBS(BSreceiver).LoS_status;
+                COMM_dataset{t}.bs{BSreceiver}.LoS_status=channel_LoS_status;
                 COMM_dataset{t}.bs{BSreceiver}.distance=TX{t}.channel_params_BSBS(BSreceiver).distance;
                 COMM_dataset{t}.bs{BSreceiver}.pathloss=TX{t}.channel_params_BSBS(BSreceiver).pathloss;
                 COMM_dataset{t}.bs{BSreceiver}.path_params=rmfield(TX{t}.channel_params_BSBS(BSreceiver),{'loc','distance','pathloss'});

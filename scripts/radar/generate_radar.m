@@ -31,7 +31,7 @@ function radar_dataset = generate_data(radar_params, params_inner)
     for t=1:radar_params.num_active_BS
         bs_ID = radar_params.active_BS(t);
         % fprintf('\n Basestation %i', bs_ID);
-        [~, TX{t}.channel_params_BSBS, TX{t}.loc] = read_raytracing(bs_ID, radar_params, params_inner.scenario_files, 0);
+        [~, TX{t}.channel_params_BSBS, TX{t}.loc] = read_raytracing(bs_ID, radar_params, params_inner, 0);
     end
 
     % Constructing the channel matrices from ray-tracing
@@ -46,8 +46,7 @@ function radar_dataset = generate_data(radar_params, params_inner)
         %----- BS-BS radar signals (monostatic and bistatic radar)
         for r = 1:radar_params.num_active_BS
 
-            % Channel Construction
-            radar_dataset{t}.bs{r}.signal = construct_radar_signal(params_inner.num_ant_TX(t, :), params_inner.array_rotation_TX(t,:), params_inner.ant_spacing_TX(t), radar_params.BS_ID_map(t,:), params_inner.num_ant_RX(r, :), params_inner.array_rotation_RX(r,:), params_inner.ant_spacing_RX(r), radar_params.BS_ID_map(r,:), TX{t}.channel_params_BSBS(r), radar_params);
+            radar_dataset{t}.bs{r}.signal = construct_radar_signal(params_inner.num_ant_TX(t, :), params_inner.array_rotation_TX(t,:), params_inner.ant_FoV_TX(t,:), params_inner.ant_spacing_TX(t), params_inner.num_ant_RX(r, :), params_inner.array_rotation_RX(r,:), params_inner.ant_FoV_RX(r,:), params_inner.ant_spacing_RX(r), TX{t}.channel_params_BSBS(r), radar_params);
             radar_dataset{t}.bs{r}.rotation = params_inner.array_rotation_RX(r, :);
 
             % Location, LOS status, distance, pathloss, and channel path parameters

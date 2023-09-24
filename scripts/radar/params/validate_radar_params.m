@@ -18,12 +18,14 @@ end
 function [params_inner] = validate_params(params, params_inner)
 
     params_inner = check_ant_size(params, params_inner, 'num_ant_TX', 'num_active_BS');
-    params_inner = check_ant_orientation(params, params_inner, 'activate_array_rotation', 'array_rotation_TX', 'num_active_BS');
+    params_inner = check_ant_orientation(params, params_inner, 'array_rotation_TX', 'num_active_BS');
     params_inner = check_ant_spacing(params, params_inner, 'ant_spacing_TX', 'num_active_BS');
+    params_inner = check_ant_FoV(params, params_inner, 'ant_FoV_TX', 'num_active_BS');
     
     params_inner = check_ant_size(params, params_inner, 'num_ant_RX', 'num_active_BS');
-    params_inner = check_ant_orientation(params, params_inner, 'activate_array_rotation', 'array_rotation_RX', 'num_active_BS');
+    params_inner = check_ant_orientation(params, params_inner, 'array_rotation_RX', 'num_active_BS');
     params_inner = check_ant_spacing(params, params_inner, 'ant_spacing_RX', 'num_active_BS');
+    params_inner = check_ant_FoV(params, params_inner, 'ant_FoV_RX', 'num_active_BS');
        
     assert(ismember(params.comp_speed, [1:5]), ...
             "The parameter params.comp_speed is defined from 1 to 5. Please set a valid value.")
