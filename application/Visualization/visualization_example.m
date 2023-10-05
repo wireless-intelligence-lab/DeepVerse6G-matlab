@@ -7,8 +7,8 @@ dataset = generate_deepverse_dataset('params.m');
 %% Prepare Variables
 scenario_folder = dataset.info.scenario_folder; % Folder of the scenario
 scene_id = 1; % Select a scene
-bs_id = 3; % Select a BS
-ue_id = 1; % Select a UE
+bs_id = 1; % Select a BS
+ue_id = 3; % Select a UE
 
 %% Plot 2D UE and BS positions
 figure;

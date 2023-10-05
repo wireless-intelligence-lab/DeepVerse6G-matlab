@@ -5,7 +5,7 @@
 clear;
 clc;
 
-bs_name_orig_order = [3 1 2 4]; % BS names based on WI ordering (Third BS appears first)
+bs_name_orig_order = [1 2 3 4]; % BS names based on WI ordering (Third BS appears first)
 [~, bs_name_new_order] = sort(bs_name_orig_order);% Renaming of basestations (BS1->2, BS3->3 ...)
 %% Add images
 file_idx = 0:1999;
@@ -49,12 +49,12 @@ TX_boresight_el = TX_boresight_el(bs_name_orig_order);
 full_data.bs1.wireless.path = './wireless/';
 full_data.bs1.wireless.BS_ID_map = [TX_bsID; TX_ID; TX_subID; TX_boresight_az; TX_boresight_el]';
 full_data.bs1.wireless.UE_ID_map = [3*ones(12); 1*ones(12)]';
-for bs_id = TX_bsID
-    bs_name = ['bs', num2str(bs_id, '%i')];
-    full_data.(bs_name).wireless.data = strsplit(sprintf('./wireless/scene_%i_TX%i.mat ', [file_idx; repmat(TX_ID(bs_id), 1, length(file_idx))]));
-    full_data.(bs_name).wireless.data = full_data.(bs_name).wireless.data(1:end-1);
-    full_data.(bs_name).wireless.scenario_file = './wireless/scenario_params.mat';
-end
+% for bs_id = TX_bsID
+%     bs_name = ['bs', num2str(bs_id, '%i')];
+%     full_data.(bs_name).wireless.data = strsplit(sprintf('./wireless/scene_%i_TX%i.mat ', [file_idx; repmat(TX_ID(bs_id), 1, length(file_idx))]));
+%     full_data.(bs_name).wireless.data = full_data.(bs_name).wireless.data(1:end-1);
+%     full_data.(bs_name).wireless.scenario_file = './wireless/scenario_params.mat';
+% end
 
 %% Trajectories
 full_data.trajectory = './wireless/trajectory.mat';
