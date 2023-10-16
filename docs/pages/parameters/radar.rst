@@ -15,13 +15,13 @@ Shape
   
   `Default:` |num_ant_TX|
   
-  Number of antenna elements for the radar TX arrays in the x,y,z-axes.
+  Number of antenna elements for the radar TX uniform planar arrays in the horizontal and vertical directions.
   
-  An antenna array (ULA/UPA) of ``num_ant_BS(1) x num_ant_BS(2) x num_ant_BS(3)`` elements is adopted for each active basestation.
+  An antenna array (ULA/UPA) of ``num_ant_BS(1) x num_ant_BS(2)`` elements is adopted for each active basestation.
 
   The axes of the antennas match the axes of the ray-tracing scenario.
 
-  * If a 3D vector is given as input, all the TX arrays adopt the same array.
+  * If a 2D vector is given as input, all the TX arrays adopt the same array.
 	
   * To set different array sizes for the TX arrays, you can add multiple rows of antenna sizes.
 
@@ -31,19 +31,19 @@ Shape
 
 		.. code-block:: matlab
 
-			radar.num_ant_TX = [[1, 8, 4]; [1, 4, 4]];
+			radar.num_ant_TX = [[8, 4]; [4, 4]];
 
 .. attribute:: radar.num_ant_RX
   
   `Default:` |num_ant_RX|
   
-  Number of antenna elements for the radar RX arrays in the x,y,z-axes.
+  Number of antenna elements for the radar RX uniform planar arrays in the horizontal and vertical directions..
   
-  An antenna array (ULA/UPA) of ``num_ant_BS(1) x num_ant_BS(2) x num_ant_BS(3)`` elements is adopted for each active basestation.
+  An antenna array (ULA/UPA) of ``num_ant_BS(1) x num_ant_BS(2)`` elements is adopted for each active basestation.
 
   The axes of the antennas match the axes of the ray-tracing scenario.
 
-  * If a 3D vector is given as input, all the radar RX arrays adopt the same array.
+  * If a 2D vector is given as input, all the radar RX arrays adopt the same array.
 	
   * To set different array sizes for the radar RX arrays, you can add multiple rows of antenna sizes.
 
@@ -53,9 +53,25 @@ Shape
 
 		.. code-block:: matlab
 
-			radar.num_ant_RX = [[1, 8, 4]; [1, 4, 4]];
+			radar.num_ant_RX = [[8, 4]; [4, 4]];
 
 
+
+FoV
+-------
+
+.. attribute:: radar.ant_FoV_TX
+  
+  `Default:` |ant_FoV_TX|
+  
+  The field of view of the TX antenna array. It is given as a 2D array of horizontal and vertical angles. The maximum value for the horizontal FoV is 360, and the vertical FoV is 180.
+
+
+.. attribute:: radar.ant_FoV_RX
+  
+  `Default:` |ant_FoV_UE|
+  
+  The field of view of the RX antenna array. It is given as a 2D array of horizontal and vertical angles. The maximum value for the horizontal FoV is 360, and the vertical FoV is 180.
 
 Spacing
 -------
@@ -75,13 +91,7 @@ Spacing
 
 Rotation
 --------
-.. attribute:: radar.activate_array_rotation
-  
-  `Default:` |activate_radar_array_rotation|
-  
-  Turn on/off the radar array rotation. 
-  Setting this parameter to ``1`` applies the rotation defined in :attr:`radar.array_rotation_TX` and :attr:`radar.array_rotation_RX`.
-  
+
 .. attribute:: radar.array_rotation_TX
   
   `Default:` |array_rotation_TX|
@@ -124,41 +134,32 @@ Chirp Characteristics
   
   `Default:` |S|
   
-  
+	The slope of the chirps in a frame.
+	
 .. attribute:: radar.Fs
   
   `Default:` |Fs|
   
-.. attribute:: radar.N_ADC
+  The sampling rate of the FMCW radar ADC.
+	
+.. attribute:: radar.N_samples
   
-  `Default:` |N_ADC|
+  `Default:` |N_samples|
   
-.. attribute:: radar.N_loop
+	The number of ADC samples collected from each chirp.
+	
+.. attribute:: radar.N_chirp
   
-  `Default:` |N_loop|
+  `Default:` |N_chirp|
   
-.. attribute:: radar.T_idle
-  
-  `Default:` |T_idle|
-  
-.. attribute:: radar.T_start
-  
-  `Default:` |T_start|
-  
-.. attribute:: radar.T_excess
-  
-  `Default:` |T_excess|
-  
-.. attribute:: radar.duty_cycle
-  
-  `Default:` |duty_cycle|
-  
+	The number of chirps in each radar frame.
+	
 Computation Properties
 ======================
 
-.. attribute:: radar.radar_channel_taps
+.. attribute:: radar.num_paths_radar
   
-  `Default:` |radar_channel_taps|
+  `Default:` |num_paths_radar|
   
   Maximum number of paths to be considered, e.g., choose 1 if you are only interested in the strongest radar reflection path.
 

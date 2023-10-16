@@ -10,8 +10,8 @@ import os
 import sphinx_rtd_theme, sphinx_bootstrap_theme
 
 project = 'DeepVerse 6G'
-copyright = '2022, Umut Demirhan, Abdelrahman Taha, Ahmed Alkhateeb'
-author = 'Umut Demirhan, Abdelrahman Taha, Ahmed Alkhateeb'
+copyright = '2023, Umut Demirhan, Abdelrahman Taha, Shuaifeng Jiang, Ahmed Alkhateeb'
+author = 'Umut Demirhan, Abdelrahman Taha, Shuaifeng Jiang, Ahmed Alkhateeb'
 release = '0.1'
 
 # -- General configuration ---------------------------------------------------
@@ -40,6 +40,7 @@ html_theme_path = ["_themes", ]
 
 # html_theme = 'bootstrap'
 # html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+html_show_sourcelink = False
 
 html_static_path = ['_static']
 
@@ -67,37 +68,35 @@ rst_prolog = """
 .. |lidar| replace:: 1
 .. |position| replace:: 1
 
-.. |num_ant_BS| replace:: [32, 1, 1]
-.. |num_ant_UE| replace:: [1, 1, 1]
-.. |activate_array_rotation| replace:: 0
-.. |array_rotation_BS| replace:: [5, 10, 20]
-.. |array_rotation_UE| replace:: [0, 30, 0]
+.. |num_ant_BS| replace:: [32, 1]
+.. |num_ant_UE| replace:: [1, 1]
+.. |array_rotation_BS| replace:: [0, 0, 0]
+.. |array_rotation_UE| replace:: [0, 0, 0]
+.. |ant_FoV_BS| replace:: [180, 180]
+.. |ant_FoV_UE| replace:: [360, 180]
 .. |ant_spacing_BS| replace:: 0.5
 .. |ant_spacing_UE| replace:: 0.5
-.. |radiation_pattern| replace:: 0
 .. |bandwidth| replace:: 0.05
 .. |activate_RX_filter| replace:: 0
 .. |generate_OFDM_channels| replace:: 1
 .. |num_paths| replace:: 25
 .. |num_OFDM| replace:: 512
-.. |OFDM_sampling_factor| replace:: 1
-.. |OFDM_limit| replace:: 1
+.. |OFDM_sampling| replace:: [1]
+.. |enable_Doppler| replace:: 1
 
-.. |num_ant_TX| replace:: [1, 1, 1]
-.. |num_ant_RX| replace:: [16, 1, 1]
-.. |activate_radar_array_rotation| replace:: 0
-.. |array_rotation_TX| replace:: [5, 10, 20]
-.. |array_rotation_RX| replace:: [5, 10, 20]
+
+.. |num_ant_TX| replace:: [1, 1]
+.. |num_ant_RX| replace:: [16, 1]
+.. |array_rotation_TX| replace:: [0, 0, 0]
+.. |array_rotation_RX| replace:: [0, 0, 0]
+.. |ant_FoV_TX| replace:: [180, 180]
+.. |ant_FoV_RX| replace:: [180, 180]
 .. |ant_spacing_TX| replace:: 0.5
 .. |ant_spacing_RX| replace:: 0.5
-.. |radar_channel_taps| replace:: 1000
+.. |num_paths_radar| replace:: 1000
 .. |S| replace:: 15e12
 .. |Fs| replace:: 15e6
-.. |N_ADC| replace:: 512
-.. |N_loop| replace:: 128
-.. |T_idle| replace:: 7e-6
-.. |T_start| replace:: 4.22e-6
-.. |T_excess| replace:: 1e-6
-.. |duty_cycle| replace:: 1
+.. |N_samples| replace:: 512
+.. |N_chirp| replace:: 128
 .. |comp_speed| replace:: 5
 """
