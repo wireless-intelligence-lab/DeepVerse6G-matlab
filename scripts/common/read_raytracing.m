@@ -25,11 +25,11 @@ function [channel_params_user, channel_params_BS, BS_loc] = read_raytracing(BS_I
 
         if ~isempty(params_inner.UE_file_split)
             params.num_user = params_inner.UE_file_split(2, file_idx);
-            filename = strcat('BS', num2str(BS_ID), '_UE_', num2str(params_inner.UE_file_split(1, file_idx)), '-', num2str(params_inner.UE_file_split(2, file_idx)), '.mat');
+            filename = strcat('BS', num2str(BS_ID), '_UE_', num2str(params_inner.UE_file_split(1, params_inner.gen_idx)), '-', num2str(params_inner.UE_file_split(2, params_inner.gen_idx)), '.mat');
             data = importdata(fullfile(params_inner.scenario_files, filename));
-            user_start = params_inner.UE_file_split(1, file_idx);
+            user_start = params_inner.UE_file_split(1, params_inner.gen_idx);
 
-            for ue_idx = 1:params.num_user
+            for ue_idx = 1:params_inner.UE_file_split(2, params_inner.gen_idx)
                 ue_idx_file = ue_idx - user_start;
                 max_paths = double(size(data.(data_key_name){ue_idx_file}.p, 2));
                 num_path_limited = double(min(num_paths, max_paths));

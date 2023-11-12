@@ -15,7 +15,7 @@ function [COMM_dataset, params] = generate_comm(params)
     for f = 1:length(params_inner.list_of_folders)
         fprintf('\nGenerating Scene %i/%i', f, length(params_inner.list_of_folders))
         params_inner.scenario_files = params_inner.list_of_folders{f}; % The initial of all the scenario files
-        
+        params_inner.gen_idx = f;
         COMM_scene{f} = generate_data(params, params_inner);
         param{f} = params;
     end

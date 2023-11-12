@@ -34,7 +34,6 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         % Scene first - last to be updated to a list
         comm_params.scene_first = params.scenes(1);
         comm_params.scene_last = params.scenes(end);
-        comm_params.BS_ID_map = full_data.bs1.wireless.BS_ID_map;
         
         [comm_dataset, comm_params] = generate_comm(comm_params);
         
@@ -96,7 +95,9 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
             for cam = params.camera_id
                 cam_name = sprintf('cam%i', cam);
                 for scene = 1:length(params.scenes)
-                    dataset.scene{scene}.bs{bs_count}.cam{cam_count} = full_data.(bs_name).image.(cam_name).data{params.scenes(scene)};
+                    if isfield(full_data.(bs_name).image, cam_name)
+                        dataset.scene{scene}.bs{bs_count}.cam{cam_count} = full_data.(bs_name).image.(cam_name).data{params.scenes(scene)};
+                    end
                 end
                 cam_count = cam_count + 1;
             end
