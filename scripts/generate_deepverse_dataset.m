@@ -65,7 +65,6 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
         % Scene first - last to be updated to a list
         radar_params.scene_first = params.scenes(1);
         radar_params.scene_last = params.scenes(end);
-        radar_params.BS_ID_map = full_data.bs1.wireless.BS_ID_map;
         
         [radar_dataset, radar_params] = generate_radar(radar_params);
         
