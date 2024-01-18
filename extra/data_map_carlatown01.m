@@ -6,9 +6,6 @@ clear;
 clc;
 
 %% Add images
-data_path = 'F:\Umut\Wireless-Verse\Carla-Town05';
-% Data path is used to find number of BSs and cameras
-
 file_idx = 0:2200;
 
 num_bs = 5;
@@ -19,7 +16,7 @@ cam_yaw = {{0,70,140,210},  % BS1
     {10,80,150,220}, 
     {-10,180,240,300}, 
     {10,75,270,325}};
-cam_pitch = {{-30},{-30},{-30},{-30},{-30}};
+cam_pitch = {{-15},{-15},{-15},{-15},{-15}};
 cam_FoV = {{90},{90},{90},{90},{90}};
 
 for i = 1:num_bs
@@ -30,7 +27,7 @@ for i = 1:num_bs
         cam_path = ['./images/', bs_name, '/', cam_name, '/'];
         full_data.(bs_name).image.(cam_name).data = strsplit(sprintf([cam_path, '%i.jpg '], file_idx));
         full_data.(bs_name).image.(cam_name).data = full_data.(bs_name).image.(cam_name).data(1:end-1);
-        
+
         % If there are multiple pitch & FoV values, update the following
         % cam_pitch{i}{1} with {i}{j}
         full_data.(bs_name).image.(cam_name).rotation = [0, cam_pitch{i}{1}, cam_yaw{i}{j}];

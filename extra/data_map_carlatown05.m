@@ -12,7 +12,12 @@ data_path = 'F:\Umut\Wireless-Verse\Carla-Town05';
 file_idx = 0:2300;
 
 num_bs = 3;
-cam_counter = 1;
+
+% Camera Angle Rotation
+cam_yaw = {{0,60,120,180,240},{0,60,180,240,300},{0,60,120,180,300}};
+cam_pitch = {{-30},{-30},{-30},{-30},{-30}};
+cam_FoV = {{90},{90},{90},{90},{90}};
+
 
 for i = 1:num_bs
     bs_name = ['bs' num2str(i)];
@@ -22,6 +27,11 @@ for i = 1:num_bs
         cam_path = ['./images/', bs_name, '/', cam_name, '/'];
         full_data.(bs_name).image.(cam_name).data = strsplit(sprintf([cam_path, '%i.jpg '], file_idx));
         full_data.(bs_name).image.(cam_name).data = full_data.(bs_name).image.(cam_name).data(1:end-1);
+
+        % If there are multiple pitch & FoV values, update the following
+        % cam_pitch{i}{1} with {i}{j}
+        full_data.(bs_name).image.(cam_name).rotation = [0, cam_pitch{i}{1}, cam_yaw{i}{j}];
+        full_data.(bs_name).image.(cam_name).FoV = cam_FoV{i}{1};
     end
 end
 
