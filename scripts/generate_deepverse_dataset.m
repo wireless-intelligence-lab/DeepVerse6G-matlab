@@ -95,7 +95,13 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
                 cam_name = sprintf('cam%i', cam);
                 for scene = 1:length(params.scenes)
                     if isfield(full_data.(bs_name).image, cam_name)
-                        dataset.scene{scene}.bs{bs_count}.cam{cam_count} = full_data.(bs_name).image.(cam_name).data{params.scenes(scene)};
+                        dataset.scene{scene}.bs{bs_count}.cam{cam_count}.data = full_data.(bs_name).image.(cam_name).data{params.scenes(scene)};
+                        if isfield(full_data.(bs_name).image.(cam_name), 'rotation')
+                            dataset.scene{scene}.bs{bs_count}.cam{cam_count}.rotation = full_data.(bs_name).image.(cam_name).rotation;
+                        end
+                        if isfield(full_data.(bs_name).image.(cam_name), 'FoV')
+                            dataset.scene{scene}.bs{bs_count}.cam{cam_count}.FoV = full_data.(bs_name).image.(cam_name).FoV;
+                        end
                     end
                 end
                 cam_count = cam_count + 1;
