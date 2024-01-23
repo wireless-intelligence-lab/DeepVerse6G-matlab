@@ -1,6 +1,8 @@
 addpath(genpath('scripts')) %
 
-dataset = generate_deepverse_dataset('video_params.m');
+
+parameters = read_deepverse_params('video_params.m');
+dataset = generate_deepverse_dataset(parameters);
 
 %%
 ue_idx = zeros(2000, 50);

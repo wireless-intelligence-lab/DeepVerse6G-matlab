@@ -1,5 +1,6 @@
 %%%% DeepVerse Default Communication Parameters %%%%
 % Parameters
+comm.enable = true;
 comm.num_ant_BS = [16, 1];
 comm.num_ant_UE = [1, 1];
 comm.array_rotation_BS = [0, 0, 0];         
@@ -21,9 +22,7 @@ comm.enable_Doppler = 1;
 % These are defined by the DeepVerse Generator - general params
 comm.active_BS = [];
 comm.scenario = [];   
-comm.scene_first = [];
-comm.scene_last = [];
-comm.BS_ID_map = [];
+comm.scenes = [];
 comm.scenario_folder = [];
 
 % Additional fields for the adapted generator (possibly to be cleaned)

@@ -1,6 +1,5 @@
-function [dataset] = generate_deepverse_dataset(parameters_file)
+function [dataset] = generate_deepverse_dataset(params)
 
-    params = read_params(parameters_file, 'dv');
     [full_data, params] = load_and_validate_parameters(params);
 
     %% Mobility
@@ -25,15 +24,13 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
     %% Communication 
     % - Generated together for BS-BS channel possibility
     % - May be cleaned later
-    if params.communication
-        comm_params = read_params(params.communication_parameters, 'comm', parameters_file);
+    if params.comm.enable
+        comm_params = params.comm;
         comm_params.active_BS = params.basestations;
         comm_params.dataset_folder = fullfile(params.dataset_folder, params.scenario, full_data.bs1.wireless.path);
         comm_params.scenario_folder = fullfile(params.dataset_folder, params.scenario);
         comm_params.scenario = params.scenario;
-        % Scene first - last to be updated to a list
-        comm_params.scene_first = params.scenes(1);
-        comm_params.scene_last = params.scenes(end);
+        comm_params.scenes = params.scenes;
         
         [comm_dataset, comm_params] = generate_comm(comm_params);
         
@@ -57,14 +54,12 @@ function [dataset] = generate_deepverse_dataset(parameters_file)
     end
     
     %% Radar
-    if params.radar
-        radar_params = read_params(params.radar_parameters, 'radar', parameters_file);
+    if params.radar.enable
+        radar_params = params.radar;
         radar_params.active_BS = params.basestations;
         radar_params.dataset_folder = fullfile(params.dataset_folder, params.scenario, full_data.bs1.wireless.path);
         radar_params.scenario = params.scenario;
-        % Scene first - last to be updated to a list
-        radar_params.scene_first = params.scenes(1);
-        radar_params.scene_last = params.scenes(end);
+        radar_params.scenes = params.scenes;
         
         [radar_dataset, radar_params] = generate_radar(radar_params);
         

@@ -1,7 +1,6 @@
 addpath(genpath('scripts')) %
 
-parameters = read_deepverse_params('combined_params.m');
-dataset = generate_deepverse_dataset(parameters);
+dataset = generate_deepverse_dataset('combined_params.m');
 dataset.info.radar.params.radar_KPI
 %% 1481
 for i = 1:length(dataset.scene)

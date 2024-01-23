@@ -8,7 +8,7 @@ function [params, params_inner] = add_additional_params(params, type)
 
     % All DeepSense Synth scenarios are dynamic scenarios
     params_inner.dynamic_scenario = 1;
-    list_of_folders = strsplit(sprintf('/scene_%i--', params.scene_first-1:params.scene_last-1),'--');
+    list_of_folders = strsplit(sprintf('/scene_%i--', params.scenes-1),'--');
     list_of_folders(end) = [];
     list_of_folders = fullfile(params_inner.dataset_folder, list_of_folders);
     params_inner.list_of_folders = list_of_folders;
