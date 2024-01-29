@@ -21,7 +21,7 @@ cam_FoV = {{90},{90},{90},{90},{90}};
 
 for i = 1:num_bs
     bs_name = ['bs' num2str(i)];
-    num_cam = length(dir(fullfile(data_path, ['images/' bs_name])))-2;
+    num_cam = length(cam_yaw{i});
     for j = 1:num_cam
         cam_name = ['cam' num2str(j, '%i')];
         cam_path = ['./images/', bs_name, '/', cam_name, '/'];
