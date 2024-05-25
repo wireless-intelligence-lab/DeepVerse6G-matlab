@@ -1,6 +1,6 @@
 %% General Parameters
-dv.dataset_folder = 'D:\abhilash\';
-dv.scenario = 'Carla-Town01';
+dv.dataset_folder = 'scenarios';
+dv.scenario = 'Scenario 1';
 
 dv.basestations = [1]; % Basestations to be included
 dv.scenes = [934,1438,1517]; % Scenes to be included
@@ -8,10 +8,10 @@ dv.scenes = [934,1438,1517]; % Scenes to be included
 dv.comm.enable = true;
 dv.radar.enable = true;
 
-dv.camera = false;
+dv.camera = true;
 dv.camera_id = [1, 2, 3, 4, 5];
 
-dv.lidar = false;
+dv.lidar = true;
 dv.position = true;
 
 %% Comm
@@ -45,4 +45,4 @@ dv.radar.Fs = 4e6;
 dv.radar.N_samples = 512;
 dv.radar.N_chirp = 128;
 dv.radar.num_paths = 5000;
-dv.radar.comp_speed = 5;
+dv.radar.comp_speed = 4;

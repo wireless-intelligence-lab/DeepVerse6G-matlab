@@ -16,13 +16,13 @@ Shape
   
   `Default:` |num_ant_BS|
   
-  Number of antenna elements for the basestation uniform planar arrays in the horizontal and vertical directions.
+  Number of antenna elements for the basestation arrays in the x,y,z-axes.
   
-  An antenna array (ULA/UPA) of ``num_ant_BS(1) x num_ant_BS(2)`` elements is adopted for each active basestation.
+  An antenna array (ULA/UPA) of ``num_ant_BS(1) x num_ant_BS(2) x num_ant_BS(3)`` elements is adopted for each active basestation.
 
   The axes of the antennas match the axes of the ray-tracing scenario.
 
-  * If a 2D vector is given as input, all the active basestations adopt the same array.
+  * If a 3D vector is given as input, all the active basestations adopt the same array.
 	
   * To set different array sizes for the active BSs, you can add multiple rows of antenna sizes.
 
@@ -32,34 +32,18 @@ Shape
 
 		.. code-block:: matlab
 
-			comm.num_ant_BS = [[8, 4]; [4, 4]];
+			comm.num_ant_BS = [[1, 8, 4]; [1, 4, 4]];
 
 .. attribute:: comm.num_ant_UE
   
   `Default:` |num_ant_UE|
   
-  Number of antenna elements for the user uniform planar arrays in the horizontal and vertical directions.
+  Number of antenna elements for the user arrays in the x,y,z-axes.
 
-  An antenna array (ULA/UPA) of ``num_ant_UE(1) x num_ant_UE(2)`` elements is adopted for each active UE.
+  An antenna array (ULA/UPA) of ``num_ant_UE(1) x num_ant_UE(2) x num_ant_UE(3)`` elements is adopted for each active UE.
 
   The axes of the antennas match the axes of the ray-tracing scenario.
 
-
-FoV
--------
-
-.. attribute:: comm.ant_FoV_BS
-  
-  `Default:` |ant_FoV_BS|
-  
-  The field of view of the antenna array. It is given as a 2D array of horizontal and vertical angles. The maximum value for the horizontal FoV is 360, and the vertical FoV is 180.
-
-
-.. attribute:: comm.ant_FoV_UE
-  
-  `Default:` |ant_FoV_UE|
-  
-  The field of view of the antenna array. It is given as a 2D array of horizontal and vertical angles. The maximum value for the horizontal FoV is 360, and the vertical FoV is 180.
 
 
 Spacing
@@ -80,6 +64,12 @@ Spacing
 
 Rotation
 --------
+.. attribute:: comm.activate_array_rotation
+  
+  `Default:` |activate_array_rotation|
+  
+  Turn on/off the array rotation. Setting this parameter to ``1`` applies the rotation defined in :attr:`comm.array_rotation_BS` and :attr:`comm.array_rotation_UE`.
+  
   
 .. attribute:: comm.array_rotation_BS 
   
@@ -163,17 +153,6 @@ Channel Properties
   
   Total bandwidth of the channel in GHz. 
 
-
-.. attribute:: comm.enable_Doppler
-  
-  `Default:` |enable_Doppler|
-  
-  Turn on/off the Doppler shift due to the speed of the objects in the scene.
-  
-  * ``0`` No Doppler shift is applied.
-  * ``1`` Doppler shift is applied to the channels.
-
-
 OFDM Options
 ------------
 
@@ -183,17 +162,23 @@ OFDM Options
   
   Number of OFDM subcarriers (e.g., ``256``, ``512``, ``1024``). 
 
-.. attribute:: comm.OFDM_sampling
+.. attribute:: comm.OFDM_limit
   
-  `Default:` |OFDM_sampling|
+  `Default:` |OFDM_limit|
   
   The constructed channels will be calculated only at the sampled subcarriers to reduce the size of the dataset. 
-  The list of subcarriers given in this parameter will be generated.
+  The first OFDM_limit subcarriers are subsampled with :attr:`comm.OFDM_sampling_factor` spacing between the selected subcarriers.
 
+
+.. attribute:: comm.OFDM_sampling_factor
+  
+  `Default:` |OFDM_sampling_factor|
+  
+  The subsampling spacing between generated subcarriers. 
 
 .. admonition:: Example
   
-	For ``num_OFDM = 512``, ``OFDM_sampling = 1:8:512``, the subcarriers ``{1, 9, 17, 25}`` are subsampled from the available subcarriers ``{1, 2, …, 512}``.
+	For ``OFDM_limit = 512``, ``OFDM_limit = 32`` and ``OFDM_sampling_factor = 8``, the subcarriers ``{1, 9, 17, 25}`` are subsampled from the available subcarriers ``{1, 2, …, 512}``.
   
 .. note:: 
   

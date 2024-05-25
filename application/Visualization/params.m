@@ -23,7 +23,7 @@ comm.num_ant_UE = [1, 1];
 comm.array_rotation_BS = [[0, 0, -90]; [0, 0, 90]; [0, 0, 90]; [0, 0, -90]];
 comm.array_rotation_UE = [0, 0, 0];
 comm.ant_FoV_BS = [180, 180];
-comm.ant_FoV_UE = [180, 180];
+comm.ant_FoV_UE = [360, 180];
 comm.ant_spacing_BS = .5;
 comm.ant_spacing_UE = .5;
 comm.bandwidth = 0.05;
@@ -32,7 +32,7 @@ comm.generate_OFDM_channels = 1;
 comm.num_paths = 25;
 comm.num_OFDM = 512;
 comm.OFDM_sampling = [1];
-comm.enable_Doppler = 1;
+comm.enable_Doppler = 0;
 
 %% Radar
 radar.num_ant_TX = [1, 1];

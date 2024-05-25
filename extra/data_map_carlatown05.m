@@ -9,12 +9,13 @@ clc;
 data_path = 'F:\Umut\Wireless-Verse\Carla-Town05';
 % Data path is used to find number of BSs and cameras
 
-file_idx = 0:2300;
+file_idx = 0:4000;
 
 num_bs = 3;
 
 % Camera Angle Rotation
-cam_yaw = {{0,60,120,180,240},{0,60,180,240,300},{0,60,120,180,300}};
+% cam_yaw = [[0,-60,-120,-180,-240],[0,-60,-180,-240,-300],[0,-60,-120,-180,-300]];
+cam_yaw = {{0,300,240,180,120},{0,300,180,120,60},{0,300,240,180,60}};
 cam_pitch = {{-30},{-30},{-30},{-30},{-30}};
 cam_FoV = {{90},{90},{90},{90},{90}};
 

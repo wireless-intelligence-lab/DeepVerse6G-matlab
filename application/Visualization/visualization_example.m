@@ -67,9 +67,16 @@ ylabel('Range Bin');
 title('Range-Angle Map');
 
 %% BS-UE Channel
-h = dataset.scene{scene_id}.bs{bs_id}.comm.ue{ue_id}.channel;
-figure;
-plot(pow2db(abs(fftshift(fft(h, 128)).^2)));
-ylabel('Channel Gain (dB)')
-xlabel('Beam Index');
-grid on;
+for ue_id = 1:length(dataset.scene{scene_id}.bs{bs_id}.comm.ue)
+    figure;
+    h = dataset.scene{scene_id}.bs{bs_id}.comm.ue{ue_id}.channel;
+    angles = linspace(0, 180, 128)';
+    bf_codebook = exp(-j*pi*[0:31].*cosd(angles));
+    plot(pow2db(abs(flip(fftshift(fft(h, 128))).^2)));
+    hold on
+    plot(pow2db(squeeze(abs(bf_codebook*h.').^2)))
+    ylabel('Channel Gain (dB)')
+    xlabel('Beam Index');
+    title(['UE ID: ' num2str(ue_id)])
+    grid on;
+end

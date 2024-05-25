@@ -2,6 +2,9 @@ function [dataset] = generate_deepverse_dataset(params)
 
     [full_data, params] = load_and_validate_parameters(params);
 
+    %% Empty structure for the dataset
+    dataset.parameters = params;
+    
     %% Mobility Data Processing
     if params.position
         dataset = process_mobility_data(full_data, params, dataset);
@@ -30,10 +33,12 @@ function [dataset] = generate_deepverse_dataset(params)
 end
 
 function dataset = process_mobility_data(full_data, params, dataset)
-    trajectory = load(fullfile(params.dataset_folder, params.scenario, full_data.trajectory));
-    dataset.info.mobility.object_types = trajectory.object_info;
+    trajectory_file_path = fullfile(params.dataset_folder, params.scenario, full_data.trajectory);
+    trajectory_data = load(trajectory_file_path);
+    dataset.info.mobility.object_types = trajectory_data.object_info;
+    
     for scene = 1:length(params.scenes)
-        traffic_data = trajectory.scene{params.scenes(scene)}.objects;
+        traffic_data = trajectory_data.scene{params.scenes(scene)}.objects;
         for user = 1:length(traffic_data)
             utdata = traffic_data{user};
             dataset.scene{scene}.ue{user}.id = utdata.id;

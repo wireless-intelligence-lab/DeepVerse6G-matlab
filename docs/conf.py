@@ -10,7 +10,7 @@ import os
 import sphinx_rtd_theme, sphinx_bootstrap_theme
 
 project = 'DeepVerse 6G'
-copyright = '2023, Umut Demirhan, Abdelrahman Taha, Shuaifeng Jiang, Ahmed Alkhateeb'
+copyright = '2024, Umut Demirhan, Abdelrahman Taha, Shuaifeng Jiang, Ahmed Alkhateeb'
 author = 'Umut Demirhan, Abdelrahman Taha, Shuaifeng Jiang, Ahmed Alkhateeb'
 release = '0.1'
 
@@ -35,8 +35,12 @@ matlab_src_dir = os.path.abspath('../../')
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
-html_theme_path = ["_themes", ]
+import sphinx_pdj_theme
+html_theme = 'sphinx_pdj_theme'
+html_theme_path = [sphinx_pdj_theme.get_html_theme_path()]
+
+#html_theme = 'groundwork'
+#html_theme_path = ["_themes", ]
 
 # html_theme = 'bootstrap'
 # html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
@@ -47,12 +51,13 @@ html_static_path = ['_static']
 pygments_style = 'staroffice'
 
 html_theme_options = {
-    "navigation_depth": 4
+    "navigation_depth": 4,
+    "home_link": 'hide',
 }
 
-html_css_files = [
-    'custom.css',
-]
+#html_css_files = [
+#    'custom.css',
+#]
 
 rst_prolog = """
 .. |dataset_folder| replace:: './scenarios/'
