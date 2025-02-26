@@ -1,6 +1,4 @@
 function [full_data, params] = load_and_validate_parameters(params)
-    
-    scenario_map_file = fullfile(params.dataset_folder, params.scenario, 'data_map.mat');
-    load(scenario_map_file, 'full_data');
-    
+    scenario_yaml_path = fullfile(params.dataset_folder, params.scenario, 'scenario.yaml');
+    full_data = parse_scenario_yaml(scenario_yaml_path);
 end
