@@ -15,9 +15,7 @@ Features of DeepVerse 6G Framework
 
 Dataset Access
 --------------
-The datasets using DeepVerse 6G dataset scenarios are generated with these scripts (including channel data, sensor data, etc.). The scenarios can be explored from the main website under the scenarios tab:
-
-**Main Dataset Website:** [`https://deepverse6g.net/`](https://deepverse6g.net/)
+The datasets using DeepVerse 6G dataset scenarios are generated with these scripts (including channel data, sensor data, etc.). The scenarios can be explored from the main website under the scenarios tab.
 
 **Example Scenarios:**
 - Outdoor 1: https://deepverse6g.net/scenario/O1
@@ -59,8 +57,8 @@ If you use the DeepVerse 6G dataset, the generation framework, or these scripts 
           month   = {Feb}
         }
 
-2.  **The Ray-Tracing Software Used:**
-    Remcom, Wireless InSite. `<https://www.remcom.com/wireless-insite>`_.
+2.  **The Ray-Tracing Software used for the Scenarios:**
+    Remcom, Wireless InSite: https://www.remcom.com/wireless-insite
 
     *BibTeX:*
 
